@@ -3,14 +3,15 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const puppeteer = require('puppeteer');
 
+const scrape = require(`${__dirname}/js/scrape.js`);
+
 const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const properties = [];
-
 async function scrapeProperties(url) {
+  const properties = [];
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
   await page.goto(url);
@@ -63,7 +64,10 @@ async function scrapeProperties(url) {
     properties.push(property);
   }
 
-  console.log(properties);
+  return properties;
 }
 
-scrapeProperties('https://www.home.co.uk/search/results.htm?location=harrow&TOWN_SEARCH=1&high=500000');
+(async () => {
+  const properties = await scrapeProperties('https://www.home.co.uk/search/results.htm?location=harrow&TOWN_SEARCH=1&high=500000');
+  console.log(properties.length);
+})();
