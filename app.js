@@ -15,24 +15,35 @@ async function scrapeProperties(url) {
   const page = await browser.newPage();
   await page.goto(url);
 
+  // Properties appear in divs which iterate through odd numbers, there are 10 results per page
   for (let i = 1; i < 21; i += 2) {
-    // Get property name
-    let [el] = await page.$x(`//*[@id="homeco_v6_main"]/div[1]/div[2]/div[3]/table/tbody/tr[${ i }]/td/table/tbody/tr[1]/td[2]/table/tbody/tr/td[2]/b/a`);
-    let propertyName = await (await el.getProperty('textContent')).jsonValue();
-    propertyName = propertyName.replace('\n', ' ');
+    let propertyName;
+    let propertyLink;
 
-    // Get property link
-    const propertyLink = await (await el.getProperty('href')).jsonValue();
+    // Begin with a try, if we cannot get the name of the property then we should break the loop
+    // this will also handle cases where pages have less than 10 results.
+    try {
+      const [el] = await page.$x(`//*[@id="homeco_v6_main"]/div[1]/div[2]/div[3]/table/tbody/tr[${ i }]/td/table/tbody/tr[1]/td[2]/table/tbody/tr/td[2]/b/a`);
+
+      // Get property name
+      propertyName = await (await el.getProperty('textContent')).jsonValue();
+      propertyName = propertyName.replace('\n', ' ');
+
+      // Get property link
+      propertyLink = await (await el.getProperty('href')).jsonValue();
+    } catch (err) {
+      break;
+    }
 
     // Get property type
-    [el] = await page.$x(`//*[@id="homeco_v6_main"]/div[1]/div[2]/div[3]/table/tbody/tr[${ i }]/td/table/tbody/tr[1]/td[2]/table/tbody/tr/td[3]`);
+    let [el] = await page.$x(`//*[@id="homeco_v6_main"]/div[1]/div[2]/div[3]/table/tbody/tr[${ i }]/td/table/tbody/tr[1]/td[2]/table/tbody/tr/td[3]`);
     const propertyType = await (await el.getProperty('textContent')).jsonValue();
 
     // Get price
     [el] = await page.$x(`//*[@id="homeco_v6_main"]/div[1]/div[2]/div[3]/table/tbody/tr[${ i }]/td/table/tbody/tr[1]/td[2]/table/tbody/tr/td[1]/b`);
     const propertyPrice = await (await el.getProperty('textContent')).jsonValue();
 
-    // Get image src
+    // Get image src, some properties do not have images so catch those instances
     let propertyImageLink;
     try {
       [el] = await page.$x(`//*[@id="homeco_v6_main"]/div[1]/div[2]/div[3]/table/tbody/tr[${ i }]/td/table/tbody/tr[2]/td/div[1]/div[1]/a/img`);
@@ -51,7 +62,6 @@ async function scrapeProperties(url) {
 
     properties.push(property);
   }
-
 
   console.log(properties);
 }
