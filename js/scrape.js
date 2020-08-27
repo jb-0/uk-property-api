@@ -16,7 +16,7 @@ exports.constructURL = (query) => {
     }
   });
 
-  console.log(cleanQuery)
+  return `${baseURL}${cleanQuery}`;
 };
 
 exports.scrapeProperties = async (url) => {

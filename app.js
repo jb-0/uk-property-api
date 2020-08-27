@@ -10,9 +10,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.route('/properties')
   .get((req, res) => {
-    // SAMPLE: location=harrow&low=30&high=200000&terraced=true&radius=2
-    scrape.constructURL(req.query);
-    res.send(req.query);
+    res.send(scrape.constructURL(req.query));
   });
 
 (async () => {
