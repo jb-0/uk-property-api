@@ -27,13 +27,18 @@ exports.scrapeProperties = async (url) => {
 
   // Having observed cases where the number of the third div in the x path can be either 1, 3 and 4
   // the below exists to identify which of these it so it can be passed to main loop
-  let thirdDivId;
+  let thirdDivInt;
+  let lastTdInt; // As with the above, there are cases where the number of the last td varies
   for (let i = 1; i < 5; i++) {
-    const [el] = await page.$x(`//*[@id="homeco_v6_main"]/div[1]/div[2]/div[${i}]/table/tbody/
-      tr[1]/td/table/tbody/tr[1]/td[2]/table/tbody/tr/td[2]/b/a`)
-    if (el) {
-      thirdDivId = i;
-      break;
+    for (let j = 1; j < 2; j++) {
+      const [el] = await page.$x(`//*[@id="homeco_v6_main"]/div[1]/div[2]/div[${i}]/table/tbody/
+        tr[1]/td/table/tbody/tr[1]/td[2]/table/tbody/tr/td[${j}]/b/a`)
+      if (el) {
+        thirdDivInt = i;
+        lastTdInt = j;
+        console.log(`thirdDivInt=${thirdDivInt}  lastTdInt${lastTdInt}`)
+        break;
+      }
     }
   }
 
@@ -44,34 +49,33 @@ exports.scrapeProperties = async (url) => {
     // Begin with a try, if we cannot get the name of the property then we should break the loop
     // this will also handle cases where pages have less than 10 results.
     try {
-      const [el] = await page.$x(`//*[@id="homeco_v6_main"]/div[1]/div[2]/div[${thirdDivId}]/table/tbody/tr[${ i }]/td/table/tbody/tr[1]/td[2]/table/tbody/tr/td[2]/b/a`);
-
-      // Get property name
+      const [el] = await page.$x(`//*[@id="homeco_v6_main"]/div[1]/div[2]/div[${thirdDivInt}]/table/tbody/tr[${i}]/td/table/tbody/tr[1]/td[2]/table/tbody/tr/td[${lastTdInt}]/b/a`);
+      // Get property name        //*[@id="homeco_v6_main"]/div[1]/div[2]/div[--------------]/table/tbody/tr[----]/td/table/tbody/tr[1]/td[2]/table/tbody/tr/td[2]/b/a
       propertyName = await (await el.getProperty('textContent')).jsonValue();
       propertyName = propertyName.replace(/\n/g, ' ');
 
       // Get property link
       propertyLink = await (await el.getProperty('href')).jsonValue();
     } catch (err) {
-      console.log(err);
-      break;
+      console.log(`******* \nError getting property name/link in loop iteration ${i} \n${err}`);
+      //break;
     }
 
     // Get property type
-    let [el] = await page.$x(`//*[@id="homeco_v6_main"]/div[1]/div[2]/div[${thirdDivId}]/table/tbody/tr[${ i }]/td/table/tbody/tr[1]/td[2]/table/tbody/tr/td[3]`);
+    let [el] = await page.$x(`//*[@id="homeco_v6_main"]/div[1]/div[2]/div[${thirdDivInt}]/table/tbody/tr[${i}]/td/table/tbody/tr[1]/td[2]/table/tbody/tr/td[${lastTdInt + 1}]`); //2
     const propertyType = await (await el.getProperty('textContent')).jsonValue();
 
     // Get price
-    [el] = await page.$x(`//*[@id="homeco_v6_main"]/div[1]/div[2]/div[${thirdDivId}]/table/tbody/tr[${ i }]/td/table/tbody/tr[1]/td[2]/table/tbody/tr/td[1]/b`);
+    [el] = await page.$x(`//*[@id="homeco_v6_main"]/div[1]/div[2]/div[${thirdDivInt}]/table/tbody/tr[${i}]/td/table/tbody/tr[1]/td[2]/table/tbody/tr/td[1]/b`);
     const propertyPrice = await (await el.getProperty('textContent')).jsonValue();
 
     // Get image src, some properties do not have images so catch those instances
     let propertyImageLink;
     try {
-      [el] = await page.$x(`//*[@id="homeco_v6_main"]/div[1]/div[2]/div[${thirdDivId}]/table/tbody/tr[${ i }]/td/table/tbody/tr[2]/td/div[1]/div[1]/a/img`);
+      [el] = await page.$x(`//*[@id="homeco_v6_main"]/div[1]/div[2]/div[${thirdDivInt}]/table/tbody/tr[${i}]/td/table/tbody/tr[2]/td/div[1]/div[1]/a/img`);
       propertyImageLink = await (await el.getProperty('src')).jsonValue();
     } catch (err) {
-      //console.log(err);
+      console.log(`******* \nError getting property image in loop iteration ${i} \n${err}`);
       propertyImageLink = 'Image not available';
     }
 
