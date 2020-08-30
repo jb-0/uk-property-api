@@ -31,7 +31,17 @@ exports.scrapeProperties = async (url) => {
     let i;
     for (i = 0; i < propertyDivs.length; i++) {
       const propertyHouseLink = propertyDivs[i].querySelector('.house_link');
-      properties.push(`${propertyHouseLink}`);
+
+      const propertyPrice = propertyDivs[i].querySelector('.blue .bold')
+
+      if (propertyHouseLink) {
+        const property = {
+          name: propertyHouseLink.textContent,
+          link: `${propertyHouseLink}`,
+        };
+
+        properties.push(property)
+      }
     }
     return properties
   });
