@@ -43,8 +43,11 @@ exports.scrapeProperties = async (url) => {
         properties.push(property)
       }
     }
+
+    // page.evaluate return list of properties to the const
     return properties
   });
 
-  console.log(properties);
+  // Overall return for scrapeProperties - return list of properties
+  return properties
 };
