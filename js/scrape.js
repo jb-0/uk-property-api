@@ -31,18 +31,22 @@ exports.scrapeProperties = async (url) => {
     let i;
     for (i = 0; i < propertyDivs.length; i++) {
       // Property name and link
-      const propertyHouseLink = propertyDivs[i].querySelector('.house_link');
+      const propertyNameLink = propertyDivs[i].querySelector('.house_link');
 
       // Property price
       // Prices containing commentary such as "Offers Over" sit in a Span so an OR is used to assign
       const propertyPrice = propertyDivs[i].querySelector('.blue .bold .span')
                             || propertyDivs[i].querySelector('.blue .bold');
 
-      if (propertyHouseLink) {
+      // Property type
+      const propertyType = propertyDivs[i].querySelectorAll('.blue .bold');
+
+      if (propertyNameLink) {
         const property = {
-          name: propertyHouseLink.textContent,
-          link: `${propertyHouseLink}`,
+          name: propertyNameLink.textContent,
+          link: `${propertyNameLink}`,
           price: propertyPrice.textContent,
+          type: propertyType[2].textContent,
         };
 
         properties.push(property)
