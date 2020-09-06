@@ -30,14 +30,19 @@ exports.scrapeProperties = async (url) => {
 
     let i;
     for (i = 0; i < propertyDivs.length; i++) {
+      // Property name and link
       const propertyHouseLink = propertyDivs[i].querySelector('.house_link');
 
-      const propertyPrice = propertyDivs[i].querySelector('.blue .bold')
+      // Property price
+      // Prices containing commentary such as "Offers Over" sit in a Span so an OR is used to assign
+      const propertyPrice = propertyDivs[i].querySelector('.blue .bold .span')
+                            || propertyDivs[i].querySelector('.blue .bold');
 
       if (propertyHouseLink) {
         const property = {
           name: propertyHouseLink.textContent,
           link: `${propertyHouseLink}`,
+          price: propertyPrice.textContent,
         };
 
         properties.push(property)
