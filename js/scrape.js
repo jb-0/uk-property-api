@@ -43,37 +43,7 @@ exports.scrapeProperties = async (url) => {
     const page = await browser.newPage();
     await page.goto(`${url}&page=${i}`);
 
-    promises.push(page.evaluate(() => {
-      const propertyDivs = document.querySelectorAll('.homeco_v6_result');
-      const propertiesOnPage = [];
-
-      let j;
-      for (j = 0; j < propertyDivs.length; j++) {
-        // Property name and link
-        const propertyNameLink = propertyDivs[j].querySelector('.house_link');
-
-        // Property price
-        // Prices containing commentary such as "Offers Over" sit in a Span so an OR is used
-        const propertyPrice = propertyDivs[j].querySelector('.blue .bold .span')
-                              || propertyDivs[j].querySelector('.blue .bold');
-
-        // Property type
-        const propertyType = propertyDivs[j].querySelectorAll('.blue .bold');
-
-        if (propertyNameLink) {
-          const property = {
-            name: propertyNameLink.textContent,
-            link: `${propertyNameLink}`,
-            price: propertyPrice.textContent,
-            type: propertyType[2].textContent,
-          };
-          propertiesOnPage.push(property);
-        }
-      }
-
-      // page.evaluate return list of properties to the const
-      return propertiesOnPage;
-    }));
+    promises.push(GetPropertiesOnPage(page));
   }
 
   const allProperties = await Promise.all(promises);
@@ -81,3 +51,37 @@ exports.scrapeProperties = async (url) => {
   // Overall return for scrapeProperties - return list of properties
   return allProperties;
 };
+
+function GetPropertiesOnPage(page) {
+return page.evaluate(() => {
+    const propertyDivs = document.querySelectorAll('.homeco_v6_result');
+    const propertiesOnPage = [];
+
+    let j;
+    for (j = 0; j < propertyDivs.length; j++) {
+      // Property name and link
+      const propertyNameLink = propertyDivs[j].querySelector('.house_link');
+
+      // Property price
+      // Prices containing commentary such as "Offers Over" sit in a Span so an OR is used
+      const propertyPrice = propertyDivs[j].querySelector('.blue .bold .span')
+                            || propertyDivs[j].querySelector('.blue .bold');
+
+      // Property type
+      const propertyType = propertyDivs[j].querySelectorAll('.blue .bold');
+
+      if (propertyNameLink) {
+        const property = {
+          name: propertyNameLink.textContent,
+          link: `${propertyNameLink}`,
+          price: propertyPrice.textContent,
+          type: propertyType[2].textContent,
+        };
+        propertiesOnPage.push(property);
+      }
+    }
+
+    // page.evaluate return list of properties to the const
+    return propertiesOnPage;
+  });
+}
