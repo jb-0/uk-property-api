@@ -35,39 +35,49 @@ exports.scrapeProperties = async (url) => {
     return pages
   });
 
-  const properties = await page.evaluate(() => {
-    const propertyDivs = document.querySelectorAll('.homeco_v6_result');
-    const propertiesOnPage = [];
+  const overallListOfProperties = [];
+  const promises = [];
 
-    let i;
-    for (i = 0; i < propertyDivs.length; i++) {
-      // Property name and link
-      const propertyNameLink = propertyDivs[i].querySelector('.house_link');
+  let i;
+  for (i = 0; i <= numberOfPages; i++) {
+    const page = await browser.newPage();
+    await page.goto(`${url}&page=${i}`);
 
-      // Property price
-      // Prices containing commentary such as "Offers Over" sit in a Span so an OR is used to assign
-      const propertyPrice = propertyDivs[i].querySelector('.blue .bold .span')
-                            || propertyDivs[i].querySelector('.blue .bold');
+    promises.push(page.evaluate(() => {
+      const propertyDivs = document.querySelectorAll('.homeco_v6_result');
+      const propertiesOnPage = [];
 
-      // Property type
-      const propertyType = propertyDivs[i].querySelectorAll('.blue .bold');
+      let j;
+      for (j = 0; j < propertyDivs.length; j++) {
+        // Property name and link
+        const propertyNameLink = propertyDivs[j].querySelector('.house_link');
 
-      if (propertyNameLink) {
-        const property = {
-          name: propertyNameLink.textContent,
-          link: `${propertyNameLink}`,
-          price: propertyPrice.textContent,
-          type: propertyType[2].textContent,
-        };
+        // Property price
+        // Prices containing commentary such as "Offers Over" sit in a Span so an OR is used
+        const propertyPrice = propertyDivs[j].querySelector('.blue .bold .span')
+                              || propertyDivs[j].querySelector('.blue .bold');
 
-        propertiesOnPage.push(property)
+        // Property type
+        const propertyType = propertyDivs[j].querySelectorAll('.blue .bold');
+
+        if (propertyNameLink) {
+          const property = {
+            name: propertyNameLink.textContent,
+            link: `${propertyNameLink}`,
+            price: propertyPrice.textContent,
+            type: propertyType[2].textContent,
+          };
+          propertiesOnPage.push(property);
+        }
       }
-    }
 
-    // page.evaluate return list of properties to the const
-    return propertiesOnPage
-  });
+      // page.evaluate return list of properties to the const
+      return propertiesOnPage;
+    }));
+  }
+
+  const allProperties = await Promise.all(promises);
 
   // Overall return for scrapeProperties - return list of properties
-  return properties
+  return allProperties;
 };
