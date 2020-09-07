@@ -24,9 +24,20 @@ exports.scrapeProperties = async (url) => {
   const page = await browser.newPage();
   await page.goto(url);
 
+  // Identify the number of pages to be scraped, this is absed on the number returned at the top of
+  // the page for example: "The Home.co.uk Property Search Engine found 31 flats and houses for sale
+  // in Chelsea (within 1 mile radius)." - Each page contains a max of 10 properties
+  const numberOfPages = await page.evaluate(() => {
+    const numberOfProperties = document.querySelector('.homeco_pr_content .bluebold');
+    const maxPropertiesPerPage = 10;
+    const pages = Math.floor(numberOfProperties.textContent / 10)
+                            + (numberOfProperties.textContent % maxPropertiesPerPage);
+    return pages
+  });
+
   const properties = await page.evaluate(() => {
     const propertyDivs = document.querySelectorAll('.homeco_v6_result');
-    const properties = [];
+    const propertiesOnPage = [];
 
     let i;
     for (i = 0; i < propertyDivs.length; i++) {
@@ -49,12 +60,12 @@ exports.scrapeProperties = async (url) => {
           type: propertyType[2].textContent,
         };
 
-        properties.push(property)
+        propertiesOnPage.push(property)
       }
     }
 
     // page.evaluate return list of properties to the const
-    return properties
+    return propertiesOnPage
   });
 
   // Overall return for scrapeProperties - return list of properties
