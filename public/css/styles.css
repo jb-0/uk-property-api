@@ -1,0 +1,19 @@
+body {
+  margin: 0;
+  font-family: 'Ubuntu Condensed', sans-serif;
+}
+
+.intro-container {
+  color: white;
+  font-size: 1.75rem;
+  text-align: center;
+  padding: 50px;
+  background: linear-gradient(to right, #4776e6, #8e54e9);
+}
+
+.key-features-container {
+  color: black;
+  font-size: 1.75rem;
+  text-align: center;
+  padding: 50px;
+}
