@@ -1,6 +1,21 @@
+h3 {
+  color: #8e54e9;
+  font-size: 4rem;
+  margin: 0;
+}
+
+p {
+  color: #4776e6;
+}
+
 body {
   margin: 0;
   font-family: 'Ubuntu Condensed', sans-serif;
+}
+
+.material-icons {
+  font-size: 4rem;
+  margin: 10px;
 }
 
 .intro-container {
@@ -12,8 +27,12 @@ body {
 }
 
 .key-features-container {
-  color: black;
   font-size: 1.75rem;
   text-align: center;
   padding: 50px;
+  width: 60%;
+  margin: auto;
+
+  display: grid;
+  grid-template-columns: 10% 90%;
 }
