@@ -15,27 +15,32 @@ body {
 
 .intro-container {
   color: white;
-  font-size: 1.75rem;
+  font-size: 1.5rem;
   text-align: center;
   padding: 50px 15%;
   background: linear-gradient(to right, #4776e6, #8e54e9);
 }
 
 .key-features-container {
-  font-size: 1.75rem;
+  font-size: 1.5rem;
   text-align: center;
   padding: 50px;
-  width: 60%;
+  width: 75%;
   margin: auto;
 
   display: grid;
-  grid-template-columns: 10% 90%;
+  grid-template-columns: 20% 80%;
 }
 
 .try-it-out-container {
   padding: 50px 15%;
   color: white;
-  font-size: 1.75rem;
+  font-size: 1.5rem;
   text-align: center;
   background-color: #8e54e9;
+}
+
+.try-it-out-results-container {
+  background-color: white;
+  word-break: break-all;
 }
