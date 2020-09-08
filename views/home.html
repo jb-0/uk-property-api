@@ -5,8 +5,6 @@
   <meta charset="utf-8">
   <title>UK Property API</title>
   <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
   <link rel="stylesheet" href="/css/styles.css">
 </head>
 
@@ -19,15 +17,62 @@
 
   <div class="key-features-container">
     <div class="grid-item"><h3>140</h3></div>
-    <div class="grid-item"><p>towns across england, scotland, wales and northern island</p></div>
+    <div class="grid-item"><p>cities/towns across england, scotland, wales and northern island</p></div>
     <div class="grid-item"><h3>10</h3></div>
     <div class="grid-item"><p>query parameters, allowing for highly specific searches</p></div>
-    <div class="grid-item"><h3 class="material-icons"> code </h3></div>
+    <div class="grid-item"><h3>< ></h3></div>
     <div class="grid-item"><p>open source code base, allowing for customisations and improvements</p></div>
   </div>
 
   <div class="try-it-out-container">
+    <form action="/properties?">
+      <label for="location">Location:</label>
+      <select name="location" id="location">
+        <option value="islington">Islington</option>
+        <option value="berkhamsted">Berkhamsted</option>
+        <option value="edinburgh">Edinburgh</option>
+      </select>
 
+      <br><br>
+
+      <label for="radius">Radius (miles)</label>
+      <input id="radius" type="range" min="0" max="40" value="5" onchange="radiusvalue.value=value">
+    </input> <output id="radiusvalue">5</output>
+
+      <br><br>
+
+      <label for="low">Min Price (£):</label>
+      <input type="number" id="low" name="low">
+
+      <label for="high">Max Price (£):</label>
+      <input type="number" id="high" name="high">
+
+      <br><br>
+
+      <label for="minbeds">Min Beds:</label>
+      <input type="number" id="minbeds" name="minbeds">
+
+      <label for="maxbeds">Max Beds:</label>
+      <input type="number" id="maxbeds" name="maxbeds">
+
+      <br><br>
+
+      <label for="detached">Detached:</label>
+      <input type="checkbox" id="detached" name="detached" checked>
+
+      <label for="semi-detached">Semi:</label>
+      <input type="checkbox" id="semi-detached" name="semi-detached" checked>
+
+      <label for="terraced">Terraced:</label>
+      <input type="checkbox" id="terraced" name="terraced" checked>
+
+      <label for="flat">Flat:</label>
+      <input type="checkbox" id="flat" name="flat" checked>
+
+      <br><br>
+
+      <input type="submit" value="Submit">
+    </form>
   </div>
 
   <div class="api-documentation">
