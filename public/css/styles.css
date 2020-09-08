@@ -38,9 +38,17 @@ body {
   font-size: 1.5rem;
   text-align: center;
   background-color: #8e54e9;
+
 }
 
 .try-it-out-results-container {
-  background-color: white;
+  display: none;
+}
+
+.try-it-out-results-container p {
+  color: black;
+  font-size: 1rem;
   word-break: break-all;
+  background-color: white;
+  padding: 5px;
 }
