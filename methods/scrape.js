@@ -40,8 +40,6 @@ exports.scrapeProperties = async (url) => {
     return pages
   });
 
-  console.log(numberOfPages);
-
   const overallListOfProperties = [];
   const promises = [];
 
