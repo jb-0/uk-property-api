@@ -81,9 +81,9 @@ return page.evaluate(() => {
       if (propertyNameLink) {
         const property = {
           name: propertyNameLink.textContent,
-          link: `${propertyNameLink}`,
           price: propertyPrice.textContent,
           type: propertyType[2].textContent,
+          link: `${propertyNameLink}`,
         };
         propertiesOnPage.push(property);
       }
