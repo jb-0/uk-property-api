@@ -26,9 +26,16 @@ function showInput() {
   // Return the API call so the user can utilise as necessary
   document.getElementById('try-it-out-url').innerHTML = url;
 
-  fetch(url)
-  .then(response => response.json())
-  .then(data => document.getElementById('try-it-out-results').innerHTML = JSON.stringify(data.slice(1,3), undefined, 2));
+  document.getElementById('try-it-out-results').innerHTML = 'Fetching data......'
+
+  getProperties(url).then((data) => document.getElementById('try-it-out-results').innerHTML = data)
 
   document.getElementsByClassName('try-it-out-results-container')[0].style.display = 'block';
+}
+
+async function getProperties(url) {
+  let response = await fetch(url);
+  let data = await response.json();
+
+  return JSON.stringify(data, undefined, 2)
 }
