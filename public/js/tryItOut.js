@@ -46,5 +46,4 @@ async function getProperties(url) {
   formattedResponse += ']'
 
   return formattedResponse
-  // return JSON.stringify(data[0][0], undefined, 2)
 }
