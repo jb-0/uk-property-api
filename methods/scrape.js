@@ -30,10 +30,17 @@ exports.scrapeProperties = async (url) => {
   const numberOfPages = await page.evaluate(() => {
     const numberOfProperties = document.querySelector('.homeco_pr_content .bluebold');
     const maxPropertiesPerPage = 10;
-    const pages = Math.floor(numberOfProperties.textContent / 10)
-                            + (numberOfProperties.textContent % maxPropertiesPerPage);
+    let pages = Math.floor(numberOfProperties.textContent / 10)
+
+    // If there is a remainder then +1 so we loop one more page to get these
+    if (numberOfProperties.textContent % maxPropertiesPerPage) {
+      pages += 1;
+    }
+
     return pages
   });
+
+  console.log(numberOfPages);
 
   const overallListOfProperties = [];
   const promises = [];
