@@ -34,8 +34,17 @@ function showInput() {
 }
 
 async function getProperties(url) {
-  let response = await fetch(url);
-  let data = await response.json();
+  const response = await fetch(url);
+  const data = await response.json();
 
-  return JSON.stringify(data, undefined, 2)
+  let formattedResponse = '[<br>'
+
+  for (let i = 0; i < 6; i++) {
+    formattedResponse += `${JSON.stringify(data[0][i], undefined, 2)},<br>`
+  }
+
+  formattedResponse += ']'
+
+  return formattedResponse
+  // return JSON.stringify(data[0][0], undefined, 2)
 }
