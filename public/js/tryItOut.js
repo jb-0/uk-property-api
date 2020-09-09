@@ -37,13 +37,14 @@ async function getProperties(url) {
   const response = await fetch(url);
   const data = await response.json();
 
-  let formattedResponse = '[<br>'
+  let formattedResponse = '{<br>"properties":[<br>'
 
   for (let i = 0; i < 6; i++) {
-    formattedResponse += `${JSON.stringify(data[0][i], undefined, 2)},<br>`
+    formattedResponse += `${JSON.stringify(data.properties[i], undefined, 2)},<br>`;
   }
 
-  formattedResponse += ']'
+  formattedResponse += ']<br>';
+  formattedResponse += '}';
 
-  return formattedResponse
+  return formattedResponse;
 }
