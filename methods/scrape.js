@@ -53,8 +53,11 @@ exports.scrapeProperties = async (url) => {
 
   const allProperties = await Promise.all(promises);
 
+  // Create a valid JSON return
+  const propertiesJSON = { properties: allProperties.flat() }
+
   // Overall return for scrapeProperties - return list of properties
-  return allProperties;
+  return propertiesJSON;
 };
 
 function GetPropertiesOnPage(page) {
