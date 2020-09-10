@@ -45,7 +45,7 @@ exports.scrapeProperties = async (url) => {
   });
 
   // Limit max number of pages
-  if (numberOfPages > 10) { numberOfPages = 10; }
+  if (numberOfPages > 3) { numberOfPages = 3; }
 
   const promises = [];
 
