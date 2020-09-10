@@ -21,14 +21,22 @@ function showInput() {
     }
   }
 
-  const url = `${document.URL}properties?${query}`
+  const url = `${document.URL}properties?${query}`;
 
   // Return the API call so the user can utilise as necessary
   document.getElementById('try-it-out-url').innerHTML = url;
 
-  document.getElementById('try-it-out-results').innerHTML = 'Fetching data......'
+  document.getElementById('try-it-out-results').innerHTML = 'Fetching data......';
 
-  getProperties(url).then((data) => document.getElementById('try-it-out-results').innerHTML = data)
+  // Move the user's view to the relevant container
+  setTimeout(() => { document.getElementById('try-it-out-url').scrollIntoView(); }, 500);
+
+  getProperties(url).then((data) => {
+    document.getElementById('try-it-out-results').innerHTML = data;
+
+    // Move the user's view again to display the full results
+    setTimeout(() => { document.getElementById('try-it-out-results').scrollIntoView(); }, 500);
+  });
 
   document.getElementsByClassName('try-it-out-results-container')[0].style.display = 'block';
 }
@@ -39,7 +47,7 @@ async function getProperties(url) {
 
   let formattedResponse = '{<br>"properties":[<br>'
 
-  for (let i = 0; i < 6; i++) {
+  for (let i = 0; i < 5; i++) {
     formattedResponse += `${JSON.stringify(data.properties[i], undefined, 2)},<br>`;
   }
 
