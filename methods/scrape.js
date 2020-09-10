@@ -1,7 +1,7 @@
 const puppeteer = require('puppeteer');
 
 exports.constructURL = (query) => {
-  const baseURL = 'https://www.home.co.uk/search/results.htm?'
+  const baseURL = 'https://www.home.co.uk/search/results.htm?';
 
   const keys = Object.keys(query);
   const validKeys = ['low', 'high', 'location', 'radius', 'minbeds', 'maxbeds', 'detached',
@@ -65,7 +65,7 @@ exports.scrapeProperties = async (url) => {
 };
 
 function GetPropertiesOnPage(page) {
-return page.evaluate(() => {
+  return page.evaluate(() => {
     const propertyDivs = document.querySelectorAll('.homeco_v6_result');
     const propertiesOnPage = [];
 

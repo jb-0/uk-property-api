@@ -45,7 +45,8 @@ async function getProperties(url) {
   const response = await fetch(url);
   const data = await response.json();
 
-  let formattedResponse = '{<br>"properties":[<br>'
+  let formattedResponse = `{<br>"numberOfPropertiesFound":<br>${data.numberOfPropertiesFound}<br>`;
+  formattedResponse += '"properties":[<br>';
 
   for (let i = 0; i < 5; i++) {
     formattedResponse += `${JSON.stringify(data.properties[i], undefined, 2)},<br>`;
