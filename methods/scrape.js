@@ -27,12 +27,14 @@ exports.scrapeProperties = async (url) => {
   // Identify the number of pages to be scraped, this is based on the number returned at the top of
   // the page for example: "The Home.co.uk Property Search Engine found 31 flats and houses for sale
   // in Chelsea (within 1 mile radius)." - Each page contains a max of 10 properties
-  const numberOfPages = await page.evaluate(() => {
+  let numberOfPages = await page.evaluate(() => {
     const numberOfProperties = document.querySelector('.homeco_pr_content .bluebold') || false;
     const maxPropertiesPerPage = 10;
     let pages = 0;
     if (numberOfProperties) {
-      pages = Math.floor(numberOfProperties.textContent / 10);
+      // Larger numbers may have a comma in, so these are removed. By dividing by ten
+      // and rounding down we get the number of pages required
+      pages = Math.floor(numberOfProperties.textContent.split(',').join("") / 10);
 
       // If there is a remainder then +1 so we loop one more page to get these
       if (numberOfProperties.textContent % maxPropertiesPerPage) {
@@ -41,6 +43,9 @@ exports.scrapeProperties = async (url) => {
     }
     return pages;
   });
+
+  // Limit max number of pages
+  if (numberOfPages > 10) { numberOfPages = 10; }
 
   const promises = [];
 
