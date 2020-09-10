@@ -9,7 +9,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
 app.route('/').get((req, res) => {
-  res.sendFile(`${__dirname}/views/home.html`)
+  res.sendFile(`${__dirname}/views/home.html`);
 });
 
 app.route('/properties')

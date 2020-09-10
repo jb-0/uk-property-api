@@ -24,27 +24,28 @@ exports.scrapeProperties = async (url) => {
   const page = await browser.newPage();
   await page.goto(url);
 
-  // Identify the number of pages to be scraped, this is absed on the number returned at the top of
+  // Identify the number of pages to be scraped, this is based on the number returned at the top of
   // the page for example: "The Home.co.uk Property Search Engine found 31 flats and houses for sale
   // in Chelsea (within 1 mile radius)." - Each page contains a max of 10 properties
   const numberOfPages = await page.evaluate(() => {
-    const numberOfProperties = document.querySelector('.homeco_pr_content .bluebold');
+    const numberOfProperties = document.querySelector('.homeco_pr_content .bluebold') || false;
     const maxPropertiesPerPage = 10;
-    let pages = Math.floor(numberOfProperties.textContent / 10)
+    let pages = 0;
+    if (numberOfProperties) {
+      pages = Math.floor(numberOfProperties.textContent / 10);
 
-    // If there is a remainder then +1 so we loop one more page to get these
-    if (numberOfProperties.textContent % maxPropertiesPerPage) {
-      pages += 1;
+      // If there is a remainder then +1 so we loop one more page to get these
+      if (numberOfProperties.textContent % maxPropertiesPerPage) {
+        pages += 1;
+      }
     }
-
-    return pages
+    return pages;
   });
 
-  const overallListOfProperties = [];
   const promises = [];
 
   let i;
-  for (i = 0; i <= numberOfPages; i++) {
+  for (i = 1; i <= numberOfPages; i++) {
     const page = await browser.newPage();
     await page.goto(`${url}&page=${i}`);
 
@@ -54,7 +55,10 @@ exports.scrapeProperties = async (url) => {
   const allProperties = await Promise.all(promises);
 
   // Create a valid JSON return
-  const propertiesJSON = { properties: allProperties.flat() }
+  const propertiesJSON = {
+    numberOfPropertiesFound: allProperties.flat().length,
+    properties: allProperties.flat(),
+  };
 
   // Overall return for scrapeProperties - return list of properties
   return propertiesJSON;
