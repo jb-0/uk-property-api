@@ -69,8 +69,8 @@ exports.scrapeProperties = async (url) => {
   return propertiesJSON;
 };
 
-function GetPropertiesOnPage(page) {
-  return page.evaluate(() => {
+async function GetPropertiesOnPage(page) {
+  const propertiesOnPage = await page.evaluate(() => {
     const propertyDivs = document.querySelectorAll('.homeco_v6_result');
     const propertiesOnPage = [];
 
@@ -101,4 +101,8 @@ function GetPropertiesOnPage(page) {
     // page.evaluate return list of properties to the const
     return propertiesOnPage;
   });
+
+  await page.close();
+
+  return propertiesOnPage;
 }
