@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
+// eslint-disable-next-line import/no-dynamic-require
 const scrape = require(`${__dirname}/methods/scrape.js`);
 const app = express();
 // const port = process.env.PORT || 3000;
