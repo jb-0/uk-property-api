@@ -3,7 +3,10 @@ const bodyParser = require('body-parser');
 
 const scrape = require(`${__dirname}/methods/scrape.js`);
 const app = express();
-const port = process.env.PORT || 3000;
+// const port = process.env.PORT || 3000;
+
+const PORT = 8080;
+const HOST = '0.0.0.0';
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
@@ -19,6 +22,8 @@ app.route('/properties')
     res.send(properties);
   });
 
-app.listen(port, () => {
-  console.log(`UK Property API listening on port ${port}`);
-});
+// app.listen(port, () => {
+//   console.log(`UK Property API listening on port ${port}`);
+// });
+app.listen(PORT, HOST);
+console.log(`Running on http://${HOST}:${PORT}`);

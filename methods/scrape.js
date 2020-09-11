@@ -20,7 +20,7 @@ exports.constructURL = (query) => {
 };
 
 exports.scrapeProperties = async (url) => {
-  const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] });
+  const browser = await puppeteer.launch({ args: ['--disable-dev-shm-usage', '--no-sandbox'] });
   const page = await browser.newPage();
   await page.goto(url);
 
