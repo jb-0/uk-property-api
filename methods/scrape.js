@@ -65,6 +65,8 @@ exports.scrapeProperties = async (url) => {
     properties: allProperties.flat(),
   };
 
+  await browser.close();
+
   // Overall return for scrapeProperties - return list of properties
   return propertiesJSON;
 };
