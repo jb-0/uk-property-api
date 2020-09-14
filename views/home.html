@@ -3,38 +3,47 @@
 
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>UK Property API</title>
   <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/styles.css">
 </head>
 
 <body>
-  <div class="intro-container">
-    <h1>UK Property API</h1>
-    <h2>Access details for almost half a million properties currently listed for sale on the UK
-      property market</h2>
+  <div class="row">
+    <div class="col-12">
+      <div class="intro-container">
+        <h1>UK Property API</h1>
+        <h2>Access details for almost half a million properties currently listed for sale on the UK
+          property market</h2>
+      </div>
+    </div> 
   </div>
-
+  
   <div class="key-features-container">
-    <div class="grid-item">
-      <h3>140</h3>
+    <div class="row">
+      <div class="col-6">
+        <h3>140</h3>
+      </div>
+      <div class="col-6">
+        <p>cities/towns across england, scotland, wales and northern island</p>
+      </div>
     </div>
-    <div class="grid-item">
-      <p>cities/towns across england, scotland, wales and northern island</p>
+    <div class="row">
+      <div class="col-6">
+        <h3>10</h3>
+      </div>
+      <div class="col-6">
+        <p>query parameters, allowing for highly targeted searches</p>
+      </div>
     </div>
-    <div class="grid-item">
-      <h3>10</h3>
-    </div>
-    <div class="grid-item">
-      <p>query parameters, allowing for highly targeted searches</p>
-    </div>
-    <div class="grid-item">
-      <h3>
-        < >
-      </h3>
-    </div>
-    <div class="grid-item">
-      <p>open source code base, allowing for customisations and improvements</p>
+    <div class="row">
+      <div class="col-6">
+        <h3>< ></h3>
+      </div>
+      <div class="col-6">
+        <p>open source code base, allowing for customisations and improvements</p>
+      </div>
     </div>
   </div>
 
@@ -56,40 +65,61 @@
 
     <br><br>
 
-    <label for="low">Min Price (£):</label>
-    <input type="number" id="low" name="low">
+    <div class="row">
+      <div class="col-6">
+        <label for="low">Min Price (£):</label><br>
+        <input type="number" id="low" name="low">
+      </div>
 
-    <label for="high">Max Price (£):</label>
-    <input type="number" id="high" name="high" value="150000">
+      <div class="col-6">
+        <label for="high">Max Price (£):</label><br>
+        <input type="number" id="high" name="high" value="150000">
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-6">
+        <label for="minbeds">Min Beds:</label><br>
+        <input type="number" id="minbeds" name="minbeds">
+      </div>
 
-    <br><br>
+      <div class="col-6">
+        <label for="maxbeds">Max Beds:</label><br>
+        <input type="number" id="maxbeds" name="maxbeds" value="2">
+      </div>
+    </div>
 
-    <label for="minbeds">Min Beds:</label>
-    <input type="number" id="minbeds" name="minbeds">
+    <br>
 
-    <label for="maxbeds">Max Beds:</label>
-    <input type="number" id="maxbeds" name="maxbeds" value="2">
+    <div class="row">
+      <div class="col-3">
+        <label for="detached">Detached:</label>
+        <input type="checkbox" id="detached" name="detached" checked>
+      </div>
 
-    <br><br>
+      <div class="col-3">
+        <label for="semi">Semi:</label>
+        <input type="checkbox" id="semi" name="semi" checked>
+      </div>
+        
+      <div class="col-3">
+        <label for="terraced">Terraced:</label>
+        <input type="checkbox" id="terraced" name="terraced" checked>
+      </div>
 
-    <label for="detached">Detached:</label>
-    <input type="checkbox" id="detached" name="detached" checked>
-
-    <label for="semi">Semi:</label>
-    <input type="checkbox" id="semi" name="semi" checked>
-
-    <label for="terraced">Terraced:</label>
-    <input type="checkbox" id="terraced" name="terraced" checked>
-
-    <label for="flat">Flat:</label>
-    <input type="checkbox" id="flat" name="flat" checked>
+      <div class="col-3">
+        <label for="flat">Flat:</label>
+        <input type="checkbox" id="flat" name="flat" checked>
+      </div>
+    </div>
 
     <br><br>
 
     <button type="button" onclick="showInput()">Make API call</button>
 
+    <br>
+
     <div class="try-it-out-results-container">
-      <br>
       <h4>Equivalent URL:</h3>
       <p id="try-it-out-url"></p>
       <h4>API Response (up to 5 results displayed, broad searches capped):</h3>
