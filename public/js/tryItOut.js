@@ -1,22 +1,21 @@
 function showInput() {
-  const elements = document.getElementsByClassName('try-it-out-container')[0];
+  // const elements = document.getElementsByClassName('try-it-out-container')[0];
+  const elements = document.querySelectorAll('.form-input');
 
   let query = '';
 
-  for (let j = 0; j < elements.childNodes.length; j++) {
-    // Only interested in INPUT items (numerical, checkboxes and slider) and location SELECT item
-    if ((elements.childNodes[j].value)
-        && (['SELECT', 'INPUT'].indexOf(elements.childNodes[j].tagName) >= 0)) {
-
+  for (let j = 0; j < elements.length; j++) {
+    // Only interested in items that have values
+    if (elements[j].value) {
       // The checkbox state is returned through .checked rather than .value
-      if (elements.childNodes[j].type === 'checkbox') {
-        if (elements.childNodes[j].checked) {
+      if (elements[j].type === 'checkbox') {
+        if (elements[j].checked) {
           if (query) { query = `${query}&`; }
-          query += `${elements.childNodes[j].id}=${elements.childNodes[j].checked}`;
+          query += `${elements[j].id}=${elements[j].checked}`;
         }
       } else {
         if (query) { query = `${query}&`; }
-        query += `${elements.childNodes[j].id}=${elements.childNodes[j].value}`;
+        query += `${elements[j].id}=${elements[j].value}`;
       }
     }
   }

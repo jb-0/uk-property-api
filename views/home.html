@@ -51,7 +51,7 @@
     <h2>Try it out</h2>
 
     <label for="location">Location:</label>
-    <select name="location" id="location">
+    <select class="form-input" name="location" id="location">
       <option value="islington">Islington</option>
       <option value="berkhamsted">Berkhamsted</option>
       <option value="edinburgh">Edinburgh</option>
@@ -60,7 +60,8 @@
     <br><br>
 
     <label for="radius">Radius (miles)</label>
-    <input id="radius" type="range" min="1" max="40" value="2" onchange="radiusvalue.value=value">
+    <input class="form-input" id="radius" type="range" min="1" max="40" value="2" 
+      onchange="radiusvalue.value=value">
     <output id="radiusvalue">2</output>
 
     <br><br>
@@ -68,24 +69,24 @@
     <div class="row">
       <div class="col-6">
         <label for="low">Min Price (£):</label><br>
-        <input type="number" id="low" name="low">
+        <input class="form-input" type="number" id="low" name="low">
       </div>
 
       <div class="col-6">
         <label for="high">Max Price (£):</label><br>
-        <input type="number" id="high" name="high" value="150000">
+        <input class="form-input" type="number" id="high" name="high" value="150000">
       </div>
     </div>
     <br>
     <div class="row">
       <div class="col-6">
         <label for="minbeds">Min Beds:</label><br>
-        <input type="number" id="minbeds" name="minbeds">
+        <input class="form-input" type="number" id="minbeds" name="minbeds">
       </div>
 
       <div class="col-6">
         <label for="maxbeds">Max Beds:</label><br>
-        <input type="number" id="maxbeds" name="maxbeds" value="2">
+        <input class="form-input" type="number" id="maxbeds" name="maxbeds" value="2">
       </div>
     </div>
 
@@ -93,23 +94,23 @@
 
     <div class="row">
       <div class="col-3">
-        <label for="detached">Detached:</label>
-        <input type="checkbox" id="detached" name="detached" checked>
+        <label for="detached">Detached:</label><br>
+        <input class="form-input" type="checkbox" id="detached" name="detached" checked>
       </div>
 
       <div class="col-3">
-        <label for="semi">Semi:</label>
-        <input type="checkbox" id="semi" name="semi" checked>
+        <label for="semi">Semi:</label><br>
+        <input class="form-input" type="checkbox" id="semi" name="semi" checked>
       </div>
         
       <div class="col-3">
-        <label for="terraced">Terraced:</label>
-        <input type="checkbox" id="terraced" name="terraced" checked>
+        <label for="terraced">Terraced:</label><br>
+        <input class="form-input" type="checkbox" id="terraced" name="terraced" checked>
       </div>
 
       <div class="col-3">
-        <label for="flat">Flat:</label>
-        <input type="checkbox" id="flat" name="flat" checked>
+        <label for="flat">Flat:</label><br>
+        <input class="form-input" type="checkbox" id="flat" name="flat" checked>
       </div>
     </div>
 
