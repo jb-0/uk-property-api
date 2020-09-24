@@ -25,30 +25,33 @@ exports.scrapeProperties = async (url) => {
   await page.goto(url);
 
   let numberOfPages = await GetNumberOfPages(page);
-  console.log(numberOfPages);
 
   // Limit max number of pages
   if (numberOfPages > 3) { numberOfPages = 3; }
 
-  const promises = [];
-  const properties = [];
+  // Close browser instance, this is done to try conserve memory, the same approach is taken in the
+  // loop below. This allows the app to be hosted on a free source such as Heroku.
+  await browser.close();
+
+  const allProperties = [];
 
   let i;
   for (i = 1; i <= numberOfPages; i++) {
+    const browser = await puppeteer.launch({ args: ['--disable-dev-shm-usage', '--no-sandbox'] });
     const page = await browser.newPage();
-    await page.goto(`${url}&page=${i}`);
-    promises.push(GetPropertiesOnPage(page));
-  }
 
-  const allProperties = await Promise.all(promises);
+    await page.goto(`${url}&page=${i}`);
+
+    allProperties.push(await GetPropertiesOnPage(page));
+
+    await browser.close();
+  }
 
   // Create a valid JSON return
   const propertiesJSON = {
     numberOfPropertiesFound: allProperties.flat().length,
     properties: allProperties.flat(),
   };
-
-  await browser.close();
 
   // Overall return for scrapeProperties - return list of properties
   return propertiesJSON;
@@ -65,7 +68,7 @@ async function GetNumberOfPages(page) {
     if (numberOfProperties) {
       // Larger numbers may have a comma in, so these are removed. By dividing by ten
       // and rounding down we get the number of pages required
-      pages = Math.floor(numberOfProperties.textContent.split(',').join("") / 10);
+      pages = Math.floor(numberOfProperties.textContent.split(',').join('') / 10);
 
       // If there is a remainder then +1 so we loop one more page to get these
       if (numberOfProperties.textContent % maxPropertiesPerPage) {
