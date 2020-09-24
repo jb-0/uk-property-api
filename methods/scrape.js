@@ -19,6 +19,8 @@ exports.constructURL = (query) => {
   return `${baseURL}${cleanQuery}`;
 };
 
+
+
 exports.scrapeProperties = async (url) => {
   const browser = await puppeteer.launch({ args: ['--disable-dev-shm-usage', '--no-sandbox'] });
   const page = await browser.newPage();
@@ -27,32 +29,19 @@ exports.scrapeProperties = async (url) => {
   // Identify the number of pages to be scraped, this is based on the number returned at the top of
   // the page for example: "The Home.co.uk Property Search Engine found 31 flats and houses for sale
   // in Chelsea (within 1 mile radius)." - Each page contains a max of 10 properties
-  let numberOfPages = await page.evaluate(() => {
-    const numberOfProperties = document.querySelector('.homeco_pr_content .bluebold') || false;
-    const maxPropertiesPerPage = 10;
-    let pages = 0;
-    if (numberOfProperties) {
-      // Larger numbers may have a comma in, so these are removed. By dividing by ten
-      // and rounding down we get the number of pages required
-      pages = Math.floor(numberOfProperties.textContent.split(',').join("") / 10);
-
-      // If there is a remainder then +1 so we loop one more page to get these
-      if (numberOfProperties.textContent % maxPropertiesPerPage) {
-        pages += 1;
-      }
-    }
-    return pages;
-  });
+  let numberOfPages = GetNumberOfPages(page);
 
   // Limit max number of pages
   if (numberOfPages > 3) { numberOfPages = 3; }
 
   const promises = [];
+  const properties = [];
 
   let i;
   for (i = 1; i <= numberOfPages; i++) {
     const page = await browser.newPage();
     await page.goto(`${url}&page=${i}`);
+
 
     promises.push(GetPropertiesOnPage(page));
   }
@@ -70,6 +59,30 @@ exports.scrapeProperties = async (url) => {
   // Overall return for scrapeProperties - return list of properties
   return propertiesJSON;
 };
+
+/* Identify the number of pages to be scraped, this is based on the number returned at the top of
+the page for example: "The Home.co.uk Property Search Engine found 31 flats and houses for sale
+in Chelsea (within 1 mile radius)." - Each page contains a max of 10 properties */
+async function GetNumberOfPages(page) {
+  const numberOfPages = await page.evaluate(() => {
+    const numberOfProperties = document.querySelector('.homeco_pr_content .bluebold') || false;
+    const maxPropertiesPerPage = 10;
+    let pages = 0;
+    if (numberOfProperties) {
+      // Larger numbers may have a comma in, so these are removed. By dividing by ten
+      // and rounding down we get the number of pages required
+      pages = Math.floor(numberOfProperties.textContent.split(',').join("") / 10);
+
+      // If there is a remainder then +1 so we loop one more page to get these
+      if (numberOfProperties.textContent % maxPropertiesPerPage) {
+        pages += 1;
+      }
+    }
+    return pages;
+  });
+
+  return numberOfPages;
+}
 
 async function GetPropertiesOnPage(page) {
   const propertiesOnPage = await page.evaluate(() => {
