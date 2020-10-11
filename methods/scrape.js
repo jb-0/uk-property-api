@@ -82,28 +82,29 @@ async function GetNumberOfPages(page) {
 }
 
 async function GetPropertiesOnPage(page) {
+  // page.on('console', (consoleObj) => console.log(consoleObj.text()));
+
   const propertiesOnPage = await page.evaluate(() => {
-    const propertyDivs = document.querySelectorAll('.homeco_v6_result');
+    const propertyDivs = document.querySelectorAll('.property-listing');
     const propertiesOnPage = [];
 
     let j;
     for (j = 0; j < propertyDivs.length; j++) {
       // Property name and link
-      const propertyNameLink = propertyDivs[j].querySelector('.house_link');
+      const propertyNameLink = propertyDivs[j].querySelector('.property-listing__header .property-listing__title .house_link');
 
       // Property price
       // Prices containing commentary such as "Offers Over" sit in a Span so an OR is used
-      const propertyPrice = propertyDivs[j].querySelector('.blue .bold .span')
-                            || propertyDivs[j].querySelector('.blue .bold');
+      const propertyPrice = propertyDivs[j].querySelector('.property-listing__header .property-listing__title .property-listing__price');
 
       // Property type
-      const propertyType = propertyDivs[j].querySelectorAll('.blue .bold');
+      const propertyType = propertyDivs[j].querySelector('.property-listing__header .property-listing__type');
 
       if (propertyNameLink) {
         const property = {
           name: propertyNameLink.textContent,
           price: propertyPrice.textContent,
-          type: propertyType[2].textContent,
+          type: propertyType.textContent,
           link: `${propertyNameLink}`,
         };
         propertiesOnPage.push(property);
