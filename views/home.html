@@ -32,75 +32,68 @@
   <div class="try-it-out-container">
     <h2>Try it out</h2>
 
-    <label for="location">Location:</label>
-    <select class="form-input" name="location" id="location">
-      <option value="islington">Islington</option>
-      <option value="berkhamsted">Berkhamsted</option>
-      <option value="edinburgh">Edinburgh</option>
-    </select>
+    <div class="try-it-out-form">
+      <span>
+      <label for="location">Location:</label>
+      <select class="form-input" name="location" id="location">
+        <option value="islington">Islington</option>
+        <option value="berkhamsted">Berkhamsted</option>
+        <option value="edinburgh">Edinburgh</option>
+      </select>
+      </span>
 
-    <br><br>
+      <span>
+      <label for="radius">Radius (miles)</label>
+      <input class="form-input" id="radius" type="range" min="1" max="40" value="2" 
+        onchange="radiusvalue.value=value">
+      <output id="radiusvalue">2</output>
+      </span>
 
-    <label for="radius">Radius (miles)</label>
-    <input class="form-input" id="radius" type="range" min="1" max="40" value="2" 
-      onchange="radiusvalue.value=value">
-    <output id="radiusvalue">2</output>
-
-    <br><br>
-
-    <div class="row">
-      <div class="col-6">
+      <span>
         <label for="low">Min Price (£):</label><br>
         <input class="form-input" type="number" id="low" name="low">
-      </div>
+      </span>
 
-      <div class="col-6">
+      <span>
         <label for="high">Max Price (£):</label><br>
         <input class="form-input" type="number" id="high" name="high" value="150000">
-      </div>
-    </div>
-    <br>
-    <div class="row">
-      <div class="col-6">
+      </span>
+
+      <span>
         <label for="minbeds">Min Beds:</label><br>
         <input class="form-input" type="number" id="minbeds" name="minbeds">
-      </div>
+      </span>
 
-      <div class="col-6">
+      <span>
         <label for="maxbeds">Max Beds:</label><br>
         <input class="form-input" type="number" id="maxbeds" name="maxbeds" value="2">
-      </div>
-    </div>
+      </span>
 
-    <br>
-
-    <div class="row">
-      <div class="col-3">
+      <span>
         <label for="detached">Detached:</label><br>
         <input class="form-input" type="checkbox" id="detached" name="detached" checked>
-      </div>
+      </span>
 
-      <div class="col-3">
-        <label for="semi">Semi:</label><br>
-        <input class="form-input" type="checkbox" id="semi" name="semi" checked>
-      </div>
-        
-      <div class="col-3">
+      <span>
         <label for="terraced">Terraced:</label><br>
         <input class="form-input" type="checkbox" id="terraced" name="terraced" checked>
-      </div>
+      </span>
 
-      <div class="col-3">
+      <span>
+        <label for="semi">Semi:</label><br>
+        <input class="form-input" type="checkbox" id="semi" name="semi" checked>
+      </span>
+      
+      <span>
         <label for="flat">Flat:</label><br>
         <input class="form-input" type="checkbox" id="flat" name="flat" checked>
-      </div>
+      </span>
     </div>
-
-    <br><br>
 
     <button type="button" onclick="showInput()">Make API call</button>
 
-    <br>
+
+    
 
     <div class="try-it-out-results-container">
       <h4>Equivalent URL:</h3>

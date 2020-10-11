@@ -13,6 +13,9 @@ body {
   font-family: 'Ubuntu Condensed', sans-serif;
 }
 
+/* ************************************
+Intro section
+************************************ */
 .intro-container {
   color: white;
   font-size: 1.5rem;
@@ -21,7 +24,9 @@ body {
   background: linear-gradient(to right, #4776e6, #8e54e9);
 }
 
-
+/* ************************************
+Key features section
+************************************ */
 .key-features-container {
   background-color: white;
   font-size: 1.5rem;
@@ -37,6 +42,11 @@ body {
   margin: 0;
 }
 
+.key-feature p {
+  padding: 10px 0;
+}
+
+/* Mobile and small device layout tweaks */
 @media only screen and (max-width: 768px) {
   .key-features-container {
     grid-template-columns: 1fr;
@@ -47,24 +57,28 @@ body {
   }
 }
 
-.key-feature p {
-  padding: 10px 0;
-}
 
-
+/* ************************************
+Try it out section
+************************************ */
 .try-it-out-container {
   padding: 50px 30%;
   color: white;
   font-size: 1.5rem;
   text-align: center;
   background-color: #8e54e9;
-
 }
 
 .try-it-out-results-container {
   display: none;
   text-align: center;
   margin: auto;
+}
+
+.try-it-out-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1rem;
 }
 
 .try-it-out-results-container p {
@@ -74,4 +88,11 @@ body {
   background-color: white;
   padding: 5px;
   text-align: left;
+}
+
+/* Mobile and small device layout tweaks */
+@media only screen and (max-width: 768px) {
+  .try-it-out-form {
+    grid-template-columns: 1fr;
+  }
 }
