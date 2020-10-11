@@ -62,7 +62,7 @@ Key features section
 Try it out section
 ************************************ */
 .try-it-out-container {
-  padding: 50px 30%;
+  padding: 50px 0px;
   color: white;
   font-size: 1.5rem;
   text-align: center;
@@ -73,12 +73,14 @@ Try it out section
   display: none;
   text-align: center;
   margin: auto;
+  width: 700px;
 }
 
 .try-it-out-form {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 1rem;
+  padding: 0px 30%;
 }
 
 .try-it-out-results-container p {
@@ -94,5 +96,14 @@ Try it out section
 @media only screen and (max-width: 768px) {
   .try-it-out-form {
     grid-template-columns: 1fr;
+    padding: 0px 10px;
+  }
+
+  .try-it-out-container {
+    padding: 50px 20px;
+  }
+
+  .try-it-out-results-container {
+    width: 95%;
   }
 }
