@@ -1,109 +1,48 @@
-h3 {
-  color: #8e54e9;
-  font-size: 4rem;
-  margin: 0;
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+:root {
+  --primary-color: #8e54e9;
+  --secondary-color: #e0e0e0;
+  --tertiary-color: #4776e6;
 }
 
-p {
-  color: #4776e6;
+* {
+  box-sizing: border-box;
 }
 
 body {
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  /* flex-direction: column;
+  align-items: center;
+  justify-content: center; */
+  text-align: center;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
   margin: 0;
-  font-family: 'Ubuntu Condensed', sans-serif;
+  color: var(--secondary-color);
 }
 
-/* ************************************
-Intro section
-************************************ */
-.intro-container {
-  color: white;
-  font-size: 1.5rem;
-  text-align: center;
-  padding: 50px 15%;
+h1 {
+  font-size: 3rem;
+}
+
+p {
+  font-size: 2rem;
+}
+
+.first-container {
   background: linear-gradient(to right, #4776e6, #8e54e9);
+  width: 100%;
+  height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* ************************************
-Key features section
-************************************ */
-.key-features-container {
-  background-color: white;
-  font-size: 1.5rem;
-  text-align: center;
-  padding: 50px 20%;
-  display: grid;
-  grid-template-columns: 0.75fr 1.25fr;
-  grid-gap: 1rem;
-}
-
-.key-features-container p {
-  text-align: left;
-  margin: 0;
-}
-
-.key-feature p {
-  padding: 10px 0;
-}
-
-/* Mobile and small device layout tweaks */
-@media only screen and (max-width: 768px) {
-  .key-features-container {
-    grid-template-columns: 1fr;
-  }
-
-  .key-features-container p {
-    text-align: center;
-  }
-}
-
-
-/* ************************************
-Try it out section
-************************************ */
-.try-it-out-container {
-  padding: 50px 0px;
-  color: white;
-  font-size: 1.5rem;
-  text-align: center;
-  background-color: #8e54e9;
-}
-
-.try-it-out-results-container {
-  display: none;
-  text-align: center;
-  margin: auto;
-  width: 700px;
-}
-
-.try-it-out-form {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 1rem;
-  padding: 0px 30%;
-}
-
-.try-it-out-results-container p {
-  color: black;
-  font-size: 1rem;
-  word-break: break-all;
-  background-color: white;
-  padding: 5px;
-  text-align: left;
-}
-
-/* Mobile and small device layout tweaks */
-@media only screen and (max-width: 768px) {
-  .try-it-out-form {
-    grid-template-columns: 1fr;
-    padding: 0px 10px;
-  }
-
-  .try-it-out-container {
-    padding: 50px 20px;
-  }
-
-  .try-it-out-results-container {
-    width: 95%;
-  }
+.first-container-text {
+  width: 75%;
+  max-width: 700px;
 }
