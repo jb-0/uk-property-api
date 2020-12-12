@@ -88,6 +88,8 @@ p, h2 {
 
 .third-container {
   padding: 30px 10px;
+  max-width: 600px;
+  margin: auto;
 }
 
 form {
@@ -95,23 +97,36 @@ form {
   flex-direction: row;
   flex-flow: row wrap;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
+  
+}
+
+form p {
+  font-size: 1.5rem;
 }
 
 .form-label {
-  flex-basis: 20%;
+  flex-basis: 35%;
 }
 
-.form-input {
-  flex-basis: 80%;
+.form-input, button {
+  flex-basis: 60%;
+  outline: 0;
+  height: 25px;
+  font-family: inherit;
+  color: var(--primary-color);
+  padding: 0 10px;
+  border-radius: 10px;
+  border: none;
+  font-size: 1.2rem;
 }
 
-#radius-label {
-  flex-basis: 10%;
+#radius {
+  flex-basis: 55%;
 }
 
 #radiusvalue {
-  flex-basis: 5%;
+  flex-basis: 3%;
 }
 
 .footer-container {
@@ -121,4 +136,16 @@ form {
 .footer-container a {
   text-decoration: none;
   color: var(--secondary-color);
+}
+
+button {
+  margin: 10px 0;
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  border: solid var(--secondary-color);
+  height: 40px;
+}
+
+button:hover {
+  transform: scale(.98);
 }
