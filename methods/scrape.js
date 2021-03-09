@@ -1,6 +1,7 @@
 const puppeteer = require('puppeteer');
 
 exports.constructURL = (query) => {
+  console.log(query);
   const baseURL = 'https://www.home.co.uk/search/results.htm?';
 
   const keys = Object.keys(query);

@@ -1,17 +1,18 @@
 interface QueryParams {
-  low: String;
-  high: String;
-  location: String;
-  radius: String;
-  minbeds: String;
-  maxbeds: String;
-  detached: String;
-  terraced: String;
-  flat: String;
-  semi: String;
+  [index: string]: string;
+  low: string;
+  high: string;
+  location: string;
+  radius: string;
+  minbeds: string;
+  maxbeds: string;
+  detached: string;
+  terraced: string;
+  flat: string;
+  semi: string;
 }
 
-export const constructURL = (query: QueryParams) => {
+export const generateURL = (query: QueryParams) => {
   const baseURL = 'https://www.home.co.uk/search/results.htm?';
 
   const validKeys = [
