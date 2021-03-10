@@ -1,4 +1,4 @@
-import puppeteer from 'puppeteer';
+import * as puppeteer from 'puppeteer';
 
 // Opted to start using the term dwelling/dwellings as properties can be a bit misleading
 interface Dwelling {
@@ -37,8 +37,8 @@ const processSearch = async (url: string): Promise<DwellingsSearchRes> => {
   }
 
   const dwellings: DwellingsSearchRes = {
-    noOfDwellings: allDwellings.flat().length,
-    dwellings: allDwellings.flat(),
+    noOfDwellings: allDwellings.length,
+    dwellings: allDwellings,
   };
 
   return dwellings;
@@ -116,7 +116,7 @@ const scrapePropertiesFromPage = async(page: puppeteer.Page): Promise<Array<Dwel
         propertiesOnPage.push(property);
       }
     }
-    
+
     return propertiesOnPage;
   });
 
