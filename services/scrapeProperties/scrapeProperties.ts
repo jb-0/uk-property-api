@@ -13,61 +13,63 @@ interface DwellingsSearchRes {
   dwellings: Array<Dwelling>;
 }
 
-const scrapeProperties = async (url: string): Promise<DwellingsSearchRes> => {
-  const numberOfPages = await GetNumberOfPages(url, 3);
+const puppeteerConfig = {
+  args: ['--disable-dev-shm-usage', '--no-sandbox'],
+};
 
-  const allProperties = [];
+const processSearch = async (url: string): Promise<DwellingsSearchRes> => {
+  const allDwellings: Array<Dwelling> = [];
+  const numberOfPages = await getNumberOfPages(url, 3);
 
+  // Iterate through the web pages, the pagination on home.co.uk starts at 1, while it appears
+  // inefficient to keep opening and browser it is done to conserve memory, this means the site
+  // will work on a free tier in heroku.
   for (let i = 1; i <= numberOfPages; i++) {
-    const browser = await puppeteer.launch({
-      args: ['--disable-dev-shm-usage', '--no-sandbox'],
-    });
+    const browser = await puppeteer.launch(puppeteerConfig);
     const page = await browser.newPage();
-
     await page.goto(`${url}&page=${i}`);
 
-    allProperties.push(await GetPropertiesOnPage(page));
+    // Scrape the properties from the current page
+    const pageDwellings = await scrapePropertiesFromPage(page);
+    allDwellings.push(...pageDwellings);
 
     await browser.close();
   }
 
-  // Create a valid JSON return
-  const propertiesJSON: DwellingsSearchRes = {
-    noOfDwellings: allProperties.flat().length,
-    dwellings: allProperties.flat(),
+  const dwellings: DwellingsSearchRes = {
+    noOfDwellings: allDwellings.flat().length,
+    dwellings: allDwellings.flat(),
   };
 
-  // Overall return for scrapeProperties - return list of properties
-  return propertiesJSON;
+  return dwellings;
 };
 
 /* Identify the number of pages to be scraped, this is based on the number returned at the top of
 the page for example: "The Home.co.uk Property Search Engine found 31 flats and houses for sale
 in Chelsea (within 1 mile radius)." - Each page contains a max of 10 properties */
-async function GetNumberOfPages(url, limit) {
-  const browser = await puppeteer.launch({
-    args: ['--disable-dev-shm-usage', '--no-sandbox'],
-  });
+const getNumberOfPages = async(url: string, limit: number): Promise<number> => {
+  const browser = await puppeteer.launch(puppeteerConfig);
   const page = await browser.newPage();
   await page.goto(url);
   
   let numberOfPages = await page.evaluate(() => {
-    const numberOfProperties =
-      document.querySelector('.homeco_pr_content .bluebold') || false;
+    let noOfDwellingsText = document.querySelector('.homeco_pr_content .bluebold')?.textContent;
+    let pages = 0; 
     const maxPropertiesPerPage = 10;
-    let pages = 0;
-    if (numberOfProperties) {
-      // Larger numbers may have a comma in, so these are removed. By dividing by ten
-      // and rounding down we get the number of pages required
-      pages = Math.floor(
-        numberOfProperties.textContent.split(',').join('') / 10,
-      );
+    
+    if (noOfDwellingsText) {
+      // Larger numbers may have a comma in, so these are removed. 
+      noOfDwellingsText = noOfDwellingsText.split(',').join('');
 
-      // If there is a remainder then +1 so we loop one more page to get these
-      if (numberOfProperties.textContent % maxPropertiesPerPage) {
+      // By dividing by ten and rounding down we get the number of pages required
+      pages = Math.floor(parseInt(noOfDwellingsText) / maxPropertiesPerPage);
+
+      // If there is a remainder then +1 so we loop one more page to get the remaining dwellings
+      if (parseInt(noOfDwellingsText) % maxPropertiesPerPage) {
         pages += 1;
       }
     }
+
     return pages;
   });
 
@@ -76,19 +78,15 @@ async function GetNumberOfPages(url, limit) {
     numberOfPages = limit;
   }
 
-  // Close browser instance, this is done to try conserve memory, the same approach is taken in the
-  // loop below. This allows the app to be hosted on a free source such as Heroku.
   await browser.close();
 
   return numberOfPages;
 }
 
-async function GetPropertiesOnPage(page) {
-  // page.on('console', (consoleObj) => console.log(consoleObj.text()));
-
+async function scrapePropertiesFromPage(page: puppeteer.Page): Promise<Array<Dwelling>> {
   const propertiesOnPage = await page.evaluate(() => {
     const propertyDivs = document.querySelectorAll('.property-listing');
-    const propertiesOnPage = [];
+    const propertiesOnPage: Array<Dwelling> = [];
 
     let j;
     for (j = 0; j < propertyDivs.length; j++) {
@@ -109,10 +107,10 @@ async function GetPropertiesOnPage(page) {
       );
 
       if (propertyNameLink) {
-        const property = {
-          name: propertyNameLink.textContent,
-          price: propertyPrice.textContent,
-          type: propertyType.textContent,
+        const property: Dwelling = {
+          name: propertyNameLink?.textContent || "",
+          price: propertyPrice?.textContent || "",
+          type: propertyType?.textContent || "",
           link: `${propertyNameLink}`,
         };
         propertiesOnPage.push(property);
@@ -128,4 +126,4 @@ async function GetPropertiesOnPage(page) {
   return propertiesOnPage;
 }
 
-export default scrapeProperties;
+export default processSearch;
