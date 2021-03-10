@@ -83,7 +83,7 @@ const getNumberOfPages = async(url: string, limit: number): Promise<number> => {
   return numberOfPages;
 }
 
-async function scrapePropertiesFromPage(page: puppeteer.Page): Promise<Array<Dwelling>> {
+const scrapePropertiesFromPage = async(page: puppeteer.Page): Promise<Array<Dwelling>> => {
   const propertiesOnPage = await page.evaluate(() => {
     const propertyDivs = document.querySelectorAll('.property-listing');
     const propertiesOnPage: Array<Dwelling> = [];
@@ -116,8 +116,7 @@ async function scrapePropertiesFromPage(page: puppeteer.Page): Promise<Array<Dwe
         propertiesOnPage.push(property);
       }
     }
-
-    // page.evaluate return list of properties to the const
+    
     return propertiesOnPage;
   });
 
@@ -126,4 +125,4 @@ async function scrapePropertiesFromPage(page: puppeteer.Page): Promise<Array<Dwe
   return propertiesOnPage;
 }
 
-export default processSearch;
+module.exports = { processSearch, getNumberOfPages, scrapePropertiesFromPage };
