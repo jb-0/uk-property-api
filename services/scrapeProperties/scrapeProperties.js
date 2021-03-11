@@ -35,10 +35,14 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-exports.__esModule = true;
-var puppeteer = require("puppeteer");
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.scrapePropertiesFromPage = exports.getNumberOfPages = exports.processSearch = void 0;
+var puppeteer_1 = __importDefault(require("puppeteer"));
 var puppeteerConfig = {
-    args: ['--disable-dev-shm-usage', '--no-sandbox']
+    args: ['--disable-dev-shm-usage', '--no-sandbox'],
 };
 var processSearch = function (url) { return __awaiter(void 0, void 0, void 0, function () {
     var allDwellings, numberOfPages, i, browser, page, pageDwellings, dwellings;
@@ -53,7 +57,7 @@ var processSearch = function (url) { return __awaiter(void 0, void 0, void 0, fu
                 _a.label = 2;
             case 2:
                 if (!(i <= numberOfPages)) return [3 /*break*/, 9];
-                return [4 /*yield*/, puppeteer.launch(puppeteerConfig)];
+                return [4 /*yield*/, puppeteer_1.default.launch(puppeteerConfig)];
             case 3:
                 browser = _a.sent();
                 return [4 /*yield*/, browser.newPage()];
@@ -76,25 +80,27 @@ var processSearch = function (url) { return __awaiter(void 0, void 0, void 0, fu
             case 9:
                 dwellings = {
                     noOfDwellings: allDwellings.length,
-                    dwellings: allDwellings
+                    dwellings: allDwellings,
                 };
                 return [2 /*return*/, dwellings];
         }
     });
 }); };
+exports.processSearch = processSearch;
 /* Identify the number of pages to be scraped, this is based on the number returned at the top of
 the page for example: "The Home.co.uk Property Search Engine found 31 flats and houses for sale
 in Chelsea (within 1 mile radius)." - Each page contains a max of 10 properties */
 var getNumberOfPages = function (url, limit) { return __awaiter(void 0, void 0, void 0, function () {
-    var browser, page, numberOfPages;
+    var browser, page, pageLimit, numberOfPages;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, puppeteer.launch(puppeteerConfig)];
+            case 0: return [4 /*yield*/, puppeteer_1.default.launch(puppeteerConfig)];
             case 1:
                 browser = _a.sent();
                 return [4 /*yield*/, browser.newPage()];
             case 2:
                 page = _a.sent();
+                pageLimit = limit || 3;
                 return [4 /*yield*/, page.goto(url)];
             case 3:
                 _a.sent();
@@ -118,8 +124,8 @@ var getNumberOfPages = function (url, limit) { return __awaiter(void 0, void 0, 
             case 4:
                 numberOfPages = _a.sent();
                 // Limit max number of pages
-                if (numberOfPages > limit) {
-                    numberOfPages = limit;
+                if (numberOfPages > pageLimit) {
+                    numberOfPages = pageLimit;
                 }
                 return [4 /*yield*/, browser.close()];
             case 5:
@@ -128,6 +134,7 @@ var getNumberOfPages = function (url, limit) { return __awaiter(void 0, void 0, 
         }
     });
 }); };
+exports.getNumberOfPages = getNumberOfPages;
 var scrapePropertiesFromPage = function (page) { return __awaiter(void 0, void 0, void 0, function () {
     var propertiesOnPage;
     return __generator(this, function (_a) {
@@ -149,7 +156,7 @@ var scrapePropertiesFromPage = function (page) { return __awaiter(void 0, void 0
                                 name: (propertyNameLink === null || propertyNameLink === void 0 ? void 0 : propertyNameLink.textContent) || "",
                                 price: (propertyPrice === null || propertyPrice === void 0 ? void 0 : propertyPrice.textContent) || "",
                                 type: (propertyType === null || propertyType === void 0 ? void 0 : propertyType.textContent) || "",
-                                link: "" + propertyNameLink
+                                link: "" + propertyNameLink,
                             };
                             propertiesOnPage.push(property);
                         }
@@ -165,4 +172,4 @@ var scrapePropertiesFromPage = function (page) { return __awaiter(void 0, void 0
         }
     });
 }); };
-module.exports = { processSearch: processSearch, getNumberOfPages: getNumberOfPages, scrapePropertiesFromPage: scrapePropertiesFromPage };
+exports.scrapePropertiesFromPage = scrapePropertiesFromPage;

@@ -1,4 +1,4 @@
-import * as puppeteer from 'puppeteer';
+import puppeteer from 'puppeteer';
 
 // Opted to start using the term dwelling/dwellings as properties can be a bit misleading
 interface Dwelling {
