@@ -1,7 +1,8 @@
 import { processSearch, getNumberOfPages, scrapePropertiesFromPage } from './scrapeProperties.js';
 
+const baseURL = 'https://www.home.co.uk/search/results.htm?inc_sold=0&showmap=0&location='
+
 describe('getNumberOfPages function tests', () => {
-  const baseURL = 'https://www.home.co.uk/search/results.htm?inc_sold=0&showmap=0&location='
   test('searching for a central london location returns a high page count', async () => {
     const url = baseURL + 'islington';
     const pageLimit = 1000; // unreasonably high page limit to ensure full count is returned
@@ -31,5 +32,27 @@ describe('getNumberOfPages function tests', () => {
     const noOfPages = await getNumberOfPages(url, pageLimit);
     
     expect(noOfPages).toEqual(0);
+  }, 20000);
+});
+
+describe('processSearch function tests', () => {
+  test('for a central london location 30 dwellings are returned', async () => {
+    const url = baseURL + 'islington';
+    const dwellings = await processSearch(url);
+
+    expect(dwellings.noOfDwellings).toEqual(30); // given limit of 3 pages expect 30 results
+  }, 60000);
+});
+
+import puppeteer from 'puppeteer';
+describe('scrapePropertiesFromPage function tests', () => {
+  test('for a central london location ten dwellings are returned from the first page', async () => {
+    const browser = await puppeteer.launch({ args: ['--disable-dev-shm-usage', '--no-sandbox']});
+    const page = await browser.newPage();
+    await page.goto(baseURL + 'islington');
+    const dwellings = await scrapePropertiesFromPage(page)
+
+    await browser.close();
+    expect(dwellings.length).toEqual(10); // on one page (the 1st) we would expect 10
   }, 20000);
 });
