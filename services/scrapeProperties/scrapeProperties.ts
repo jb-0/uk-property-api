@@ -47,9 +47,10 @@ const processSearch = async (url: string): Promise<DwellingsSearchRes> => {
 /* Identify the number of pages to be scraped, this is based on the number returned at the top of
 the page for example: "The Home.co.uk Property Search Engine found 31 flats and houses for sale
 in Chelsea (within 1 mile radius)." - Each page contains a max of 10 properties */
-const getNumberOfPages = async(url: string, limit: number): Promise<number> => {
+const getNumberOfPages = async(url: string, limit?: number): Promise<number> => {
   const browser = await puppeteer.launch(puppeteerConfig);
   const page = await browser.newPage();
+  const pageLimit = limit || 3;
   await page.goto(url);
   
   let numberOfPages = await page.evaluate(() => {
@@ -74,8 +75,8 @@ const getNumberOfPages = async(url: string, limit: number): Promise<number> => {
   });
 
   // Limit max number of pages
-  if (numberOfPages > limit) {
-    numberOfPages = limit;
+  if (numberOfPages > pageLimit) {
+    numberOfPages = pageLimit;
   }
 
   await browser.close();
@@ -125,4 +126,4 @@ const scrapePropertiesFromPage = async(page: puppeteer.Page): Promise<Array<Dwel
   return propertiesOnPage;
 }
 
-module.exports = { processSearch, getNumberOfPages, scrapePropertiesFromPage };
+export { processSearch, getNumberOfPages, scrapePropertiesFromPage };
