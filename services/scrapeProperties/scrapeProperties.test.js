@@ -102,6 +102,22 @@ describe('getNumberOfPages function tests', function () {
         });
     }); }, 20000);
 });
+describe('processSearch function tests', function () {
+    test('for a central london location 30 dwellings are returned', function () { return __awaiter(void 0, void 0, void 0, function () {
+        var url, dwellings;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    url = baseURL + 'islington';
+                    return [4 /*yield*/, scrapeProperties_js_1.processSearch(url)];
+                case 1:
+                    dwellings = _a.sent();
+                    expect(dwellings.noOfDwellings).toEqual(30); // given limit of 3 pages expect 30 results
+                    return [2 /*return*/];
+            }
+        });
+    }); }, 60000);
+});
 var puppeteer_1 = __importDefault(require("puppeteer"));
 describe('scrapePropertiesFromPage function tests', function () {
     test('for a central london location ten dwellings are returned from the first page', function () { return __awaiter(void 0, void 0, void 0, function () {
@@ -128,20 +144,4 @@ describe('scrapePropertiesFromPage function tests', function () {
             }
         });
     }); }, 20000);
-});
-describe('processSearch function tests', function () {
-    test('for a central london location 30 dwellings are returned', function () { return __awaiter(void 0, void 0, void 0, function () {
-        var url, dwellings;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    url = baseURL + 'islington';
-                    return [4 /*yield*/, scrapeProperties_js_1.processSearch(url)];
-                case 1:
-                    dwellings = _a.sent();
-                    expect(dwellings.noOfDwellings).toEqual(30); // given limit of 3 pages expect 30 results
-                    return [2 /*return*/];
-            }
-        });
-    }); }, 60000);
 });

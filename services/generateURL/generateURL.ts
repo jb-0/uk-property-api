@@ -1,7 +1,7 @@
 interface QueryParams {
   low?: string;
   high?: string;
-  location: string;
+  location?: string;
   radius?: string;
   minbeds?: string;
   maxbeds?: string;

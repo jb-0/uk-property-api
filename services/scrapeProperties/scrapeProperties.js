@@ -49,6 +49,7 @@ var processSearch = function (url) { return __awaiter(void 0, void 0, void 0, fu
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
+                console.log(url);
                 allDwellings = [];
                 return [4 /*yield*/, getNumberOfPages(url, 3)];
             case 1:
@@ -73,6 +74,7 @@ var processSearch = function (url) { return __awaiter(void 0, void 0, void 0, fu
                 return [4 /*yield*/, browser.close()];
             case 7:
                 _a.sent();
+                console.log(allDwellings);
                 _a.label = 8;
             case 8:
                 i++;
