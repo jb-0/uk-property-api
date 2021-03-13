@@ -1,6 +1,6 @@
 *.sh
 .DS_STORE
-node_modules
+*node_modules
 .eslint*
 *.env
 notes.txt
