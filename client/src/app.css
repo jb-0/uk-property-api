@@ -1,0 +1,19 @@
+:root {
+  --primary-color: #8e54e9;
+  --secondary-color: #ffffff;
+  --tertiary-color: #4776e6;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  text-align: center;
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  color: var(--secondary-color);
+  background: linear-gradient(to right, var(--tertiary-color), var(--primary-color));
+}

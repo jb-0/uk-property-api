@@ -1,7 +1,7 @@
 import React from 'react';
-import { HeaderSection } from './home.styles.js'
+import { HeaderSection } from './home.styles.js';
 
-const Home = (): JSX.Element => {
+export default function Home(): JSX.Element {
   return (
     <HeaderSection>
       <h1>UK Property API</h1>
@@ -11,6 +11,4 @@ const Home = (): JSX.Element => {
       </p>
     </HeaderSection>
   );
-};
-
-export default Home;
+}

@@ -9,5 +9,5 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.HeaderSection = void 0;
 var styled_components_1 = __importDefault(require("styled-components"));
-exports.HeaderSection = styled_components_1.default.section(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  background-color: red;\n"], ["\n  background-color: red;\n"])));
+exports.HeaderSection = styled_components_1.default.section(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  /* background-color: red; */\n"], ["\n  /* background-color: red; */\n"])));
 var templateObject_1;
