@@ -1,7 +1,7 @@
 :root {
-  --primary-color: #8e54e9;
+  --primary-color: #C06C84;
   --secondary-color: #ffffff;
-  --tertiary-color: #4776e6;
+  --tertiary-color: #355C7D;
 }
 
 * {
@@ -16,4 +16,7 @@ body {
   margin: 0;
   color: var(--secondary-color);
   background: linear-gradient(to right, var(--tertiary-color), var(--primary-color));
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  font-size: 1.5rem;
 }
