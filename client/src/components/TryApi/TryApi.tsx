@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { useState } from 'react';
 import {
   TryApiForm,
   LocationSection,
@@ -17,15 +17,26 @@ class PropertyAttributes {
   minbeds = 1;
   maxbeds = 4;
   radius = 2;
+  location = "islington";
 }
 
 export default function TryApi(): JSX.Element {
   const [propertyAttributes, setPropertyAttributes] = useState(new PropertyAttributes());
 
-  function handleFormUpdates(event: React.ChangeEvent<HTMLInputElement>) {
+  function handleFormUpdates(
+    event:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLSelectElement>
+  ) {
+    // Get the object key so we know which element needs updating
     const targetPropertyType: string = event.target.id;
 
-    if (typeof propertyAttributes[targetPropertyType as keyof PropertyAttributes] === 'boolean') {
+    // For boolean cases just use not to switch the value
+    if (
+      typeof propertyAttributes[
+        targetPropertyType as keyof PropertyAttributes
+      ] === 'boolean'
+    ) {
       setPropertyAttributes((prevValues) => {
         return {
           ...prevValues,
@@ -34,7 +45,9 @@ export default function TryApi(): JSX.Element {
           ],
         };
       });
-    } else {
+    } 
+    // For all non-boolean (number and string) cases, simply set the value
+    else {
       setPropertyAttributes((prevValues) => {
         return {
           ...prevValues,
@@ -47,16 +60,19 @@ export default function TryApi(): JSX.Element {
   return (
     <TryApiForm>
       <LocationSection>
-        {/* <label>Location</label>
-        <select name='location' id='location'>
+        <label>Location</label>
+        <select
+          name='location'
+          id='location'
+          value={propertyAttributes.location}
+          onChange={handleFormUpdates}
+        >
           <option value='islington'>Islington</option>
           <option value='berkhamsted'>Berkhamsted</option>
           <option value='edinburgh'>Edinburgh</option>
-        </select> */}
+        </select>
 
-        <p>
-          Radius (miles)
-        </p>
+        <label>Radius (miles)</label>
         <input
           id='radius'
           type='range'
@@ -110,7 +126,8 @@ export default function TryApi(): JSX.Element {
 
       <PropertyTypeSection>
         {Object.keys(propertyAttributes).map((key, idx) => {
-          const checkedState = propertyAttributes[key as keyof PropertyAttributes];
+          const checkedState =
+            propertyAttributes[key as keyof PropertyAttributes];
           if (typeof checkedState === 'boolean') {
             return (
               <input
@@ -121,7 +138,7 @@ export default function TryApi(): JSX.Element {
                 type='checkbox'
                 defaultChecked={checkedState}
                 onChange={handleFormUpdates}
-              />  
+              />
             );
           }
         })}
