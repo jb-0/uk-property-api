@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import {
   TryApiForm,
   LocationSection,
@@ -8,21 +8,27 @@ import {
 } from './TryApi.styles';
 
 class PropertyType {
-  Detached: boolean;
-  Semi: boolean;
-  Terraced: boolean;
-  Flat: boolean;
-
-  constructor() {
-    this.Detached = false;
-    this.Semi = true;
-    this.Terraced = true;
-    this.Flat = true;
-  }
+  Detached = true;
+  Semi = true;
+  Terraced = true;
+  Flat = true;
 }
 
 export default function TryApi(): JSX.Element {
   const [propertyType, setPropertyType] = useState(new PropertyType());
+
+  function handlePropertyTypeCheck(event: ChangeEvent) {
+    const targetPropertyType: string = event.target.id;
+
+    setPropertyType((prevValues) => {
+      return {
+        ...prevValues,
+        [targetPropertyType]: !propertyType[
+          targetPropertyType as keyof PropertyType
+        ],
+      };
+    });
+  }
 
   return (
     <TryApiForm>
@@ -82,6 +88,7 @@ export default function TryApi(): JSX.Element {
               name={key}
               type='checkbox'
               defaultChecked={checkedState}
+              onChange={handlePropertyTypeCheck}
             />
           );
         })}
