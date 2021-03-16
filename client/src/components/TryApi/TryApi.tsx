@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { PropertyAttributes } from './interfaces'
+import Location from './Location'
 import {
   TryApiForm,
   LocationSection,
@@ -6,19 +8,6 @@ import {
   BedroomsSection,
   PropertyTypeSection,
 } from './TryApi.styles';
-
-class PropertyAttributes {
-  Detached = true;
-  Semi = true;
-  Terraced = true;
-  Flat = true;
-  low = 50000;
-  high = 500000;
-  minbeds = 1;
-  maxbeds = 4;
-  radius = 2;
-  location = "islington";
-}
 
 export default function TryApi(): JSX.Element {
   const [propertyAttributes, setPropertyAttributes] = useState(new PropertyAttributes());
@@ -59,32 +48,9 @@ export default function TryApi(): JSX.Element {
 
   return (
     <TryApiForm>
-      <LocationSection>
-        <label>Location</label>
-        <select
-          name='location'
-          id='location'
-          value={propertyAttributes.location}
-          onChange={handleFormUpdates}
-        >
-          <option value='islington'>Islington</option>
-          <option value='berkhamsted'>Berkhamsted</option>
-          <option value='edinburgh'>Edinburgh</option>
-        </select>
+      <Location propertyAttributes={propertyAttributes} handleFormUpdates={handleFormUpdates} />
 
-        <label>Radius (miles)</label>
-        <input
-          id='radius'
-          type='range'
-          min='1'
-          max='40'
-          value={propertyAttributes.radius}
-          onChange={handleFormUpdates}
-        />
-        <output>{propertyAttributes.radius}</output>
-      </LocationSection>
-
-      <PriceSection>
+      {/* <PriceSection>
         <p>Min Price (£)</p>
         <input
           type='number'
@@ -142,7 +108,7 @@ export default function TryApi(): JSX.Element {
             );
           }
         })}
-      </PropertyTypeSection>
+      </PropertyTypeSection> */}
     </TryApiForm>
   );
 }
