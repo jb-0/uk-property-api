@@ -1,5 +1,5 @@
 import React from 'react';
-import TryApiForm from '../components/TryApiForm.js';
+import TryApi from '../components/TryApi.js';
 import { HeaderSection, KeyFeaturesSection, KeyFeaturesArticle } from './home.styles.js';
 
 export default function Home(): JSX.Element {
@@ -29,7 +29,7 @@ export default function Home(): JSX.Element {
           </p>
         </KeyFeaturesSection>
       </KeyFeaturesArticle>
-      <TryApiForm />
+      <TryApi />
     </>
   );
 }

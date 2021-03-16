@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importDefault(require("react"));
-var TryApiForm_js_1 = __importDefault(require("../components/TryApiForm.js"));
+var TryApi_js_1 = __importDefault(require("../components/TryApi.js"));
 var home_styles_js_1 = require("./home.styles.js");
 function Home() {
     return (react_1.default.createElement(react_1.default.Fragment, null,
@@ -19,6 +19,6 @@ function Home() {
                 react_1.default.createElement("p", null, "query parameters, allowing for highly targeted searches"),
                 react_1.default.createElement("h3", null, "< >"),
                 react_1.default.createElement("p", null, "open source code base, allowing for customisations and improvements"))),
-        react_1.default.createElement(TryApiForm_js_1.default, null)));
+        react_1.default.createElement(TryApi_js_1.default, null)));
 }
 exports.default = Home;
