@@ -7,27 +7,43 @@ import {
   PropertyTypeSection,
 } from './TryApi.styles';
 
-class PropertyType {
+class PropertyAttributes {
   Detached = true;
   Semi = true;
   Terraced = true;
   Flat = true;
+  low = 50000;
+  high = 500000;
+  minbeds = 1;
+  maxbeds = 4;
+  radius = 2;
 }
 
 export default function TryApi(): JSX.Element {
-  const [propertyType, setPropertyType] = useState(new PropertyType());
+  const [propertyAttributes, setPropertyAttributes] = useState(new PropertyAttributes());
 
-  function handlePropertyTypeCheck(event: ChangeEvent) {
+  function handleFormUpdates(event: React.ChangeEvent<HTMLInputElement>) {
     const targetPropertyType: string = event.target.id;
+    console.log(event);
+    
 
-    setPropertyType((prevValues) => {
-      return {
-        ...prevValues,
-        [targetPropertyType]: !propertyType[
-          targetPropertyType as keyof PropertyType
-        ],
-      };
-    });
+    if (typeof propertyAttributes[targetPropertyType as keyof PropertyAttributes] === 'boolean') {
+      setPropertyAttributes((prevValues) => {
+        return {
+          ...prevValues,
+          [targetPropertyType]: !propertyAttributes[
+            targetPropertyType as keyof PropertyAttributes
+          ],
+        };
+      });
+    } else {
+      setPropertyAttributes((prevValues) => {
+        return {
+          ...prevValues,
+          [targetPropertyType]: event.target.value,
+        };
+      });
+    }
   }
 
   return (
@@ -52,45 +68,62 @@ export default function TryApi(): JSX.Element {
         onchange='radiusvalue.value=value'
       />
       <output id='radiusvalue'>2</output>
+      */}
 
-      <p className='form-label'>Min Price (£)</p>
-      <input className='form-input' type='number' id='low' name='low' />
+      <PriceSection>
+        <p>Min Price (£)</p>
+        <input
+          type='number'
+          id='low'
+          name='low'
+          value={propertyAttributes.low}
+        />
 
-      <p className='form-label'>Max Price (£)</p>
-      <input
-        className='form-input'
-        type='number'
-        id='high'
-        name='high'
-        value='150000'
-      />
+        <p>Max Price (£)</p>
+        <input
+          type='number'
+          id='high'
+          name='high'
+          value={propertyAttributes.high}
+        />
+      </PriceSection>
 
-      <p className='form-label'>Min Beds</p>
-      <input className='form-input' type='number' id='minbeds' name='minbeds' />
+      <BedroomsSection>
+        <p>Min Beds</p>
+        <input
+          type='number'
+          id='minbeds'
+          name='minbeds'
+          value={propertyAttributes.minbeds}
+          onChange={handleFormUpdates}
+        />
 
-      <p className='form-label'>Max Beds</p>
-      <input
-        className='form-input'
-        type='number'
-        id='maxbeds'
-        name='maxbeds'
-        value='2'
-      /> */}
+        <p>Max Beds</p>
+        <input
+          type='number'
+          id='maxbeds'
+          name='maxbeds'
+          value={propertyAttributes.maxbeds}
+          onChange={handleFormUpdates}
+        />
+      </BedroomsSection>
 
       <PropertyTypeSection>
-        {Object.keys(propertyType).map((key, idx) => {
-          const checkedState = propertyType[key as keyof PropertyType];
-          return (
-            <input
-              key={idx}
-              value={key}
-              id={key}
-              name={key}
-              type='checkbox'
-              defaultChecked={checkedState}
-              onChange={handlePropertyTypeCheck}
-            />
-          );
+        {Object.keys(propertyAttributes).map((key, idx) => {
+          const checkedState = propertyAttributes[key as keyof PropertyAttributes];
+          if (typeof checkedState === 'boolean') {
+            return (
+              <input
+                key={idx}
+                value={key}
+                id={key}
+                name={key}
+                type='checkbox'
+                defaultChecked={checkedState}
+                onChange={handleFormUpdates}
+              />  
+            );
+          }
         })}
       </PropertyTypeSection>
     </TryApiForm>
