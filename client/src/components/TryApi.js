@@ -50,7 +50,6 @@ function TryApi() {
     var _a = react_1.useState(new PropertyAttributes()), propertyAttributes = _a[0], setPropertyAttributes = _a[1];
     function handleFormUpdates(event) {
         var targetPropertyType = event.target.id;
-        console.log(event);
         if (typeof propertyAttributes[targetPropertyType] === 'boolean') {
             setPropertyAttributes(function (prevValues) {
                 var _a;
@@ -65,11 +64,15 @@ function TryApi() {
         }
     }
     return (react_1.default.createElement(TryApi_styles_1.TryApiForm, null,
+        react_1.default.createElement(TryApi_styles_1.LocationSection, null,
+            react_1.default.createElement("p", { className: 'form-label', id: 'radius-label' }, "Radius (miles)"),
+            react_1.default.createElement("input", { className: 'form-input', id: 'radius', type: 'range', min: '1', max: '40', value: propertyAttributes.radius, onChange: handleFormUpdates }),
+            react_1.default.createElement("output", { id: 'radiusvalue' }, propertyAttributes.radius)),
         react_1.default.createElement(TryApi_styles_1.PriceSection, null,
             react_1.default.createElement("p", null, "Min Price (\u00A3)"),
-            react_1.default.createElement("input", { type: 'number', id: 'low', name: 'low', value: propertyAttributes.low }),
+            react_1.default.createElement("input", { type: 'number', id: 'low', name: 'low', value: propertyAttributes.low, onChange: handleFormUpdates }),
             react_1.default.createElement("p", null, "Max Price (\u00A3)"),
-            react_1.default.createElement("input", { type: 'number', id: 'high', name: 'high', value: propertyAttributes.high })),
+            react_1.default.createElement("input", { type: 'number', id: 'high', name: 'high', value: propertyAttributes.high, onChange: handleFormUpdates })),
         react_1.default.createElement(TryApi_styles_1.BedroomsSection, null,
             react_1.default.createElement("p", null, "Min Beds"),
             react_1.default.createElement("input", { type: 'number', id: 'minbeds', name: 'minbeds', value: propertyAttributes.minbeds, onChange: handleFormUpdates }),

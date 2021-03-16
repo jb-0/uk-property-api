@@ -24,8 +24,6 @@ export default function TryApi(): JSX.Element {
 
   function handleFormUpdates(event: React.ChangeEvent<HTMLInputElement>) {
     const targetPropertyType: string = event.target.id;
-    console.log(event);
-    
 
     if (typeof propertyAttributes[targetPropertyType as keyof PropertyAttributes] === 'boolean') {
       setPropertyAttributes((prevValues) => {
@@ -48,27 +46,27 @@ export default function TryApi(): JSX.Element {
 
   return (
     <TryApiForm>
-      {/* <label>Location</label>
-      <select name='location' id='location'>
-        <option value='islington'>Islington</option>
-        <option value='berkhamsted'>Berkhamsted</option>
-        <option value='edinburgh'>Edinburgh</option>
-      </select>
+      <LocationSection>
+        {/* <label>Location</label>
+        <select name='location' id='location'>
+          <option value='islington'>Islington</option>
+          <option value='berkhamsted'>Berkhamsted</option>
+          <option value='edinburgh'>Edinburgh</option>
+        </select> */}
 
-      <p className='form-label' id='radius-label'>
-        Radius (miles)
-      </p>
-      <input
-        className='form-input'
-        id='radius'
-        type='range'
-        min='1'
-        max='40'
-        value='2'
-        onchange='radiusvalue.value=value'
-      />
-      <output id='radiusvalue'>2</output>
-      */}
+        <p>
+          Radius (miles)
+        </p>
+        <input
+          id='radius'
+          type='range'
+          min='1'
+          max='40'
+          value={propertyAttributes.radius}
+          onChange={handleFormUpdates}
+        />
+        <output>{propertyAttributes.radius}</output>
+      </LocationSection>
 
       <PriceSection>
         <p>Min Price (£)</p>
@@ -77,6 +75,7 @@ export default function TryApi(): JSX.Element {
           id='low'
           name='low'
           value={propertyAttributes.low}
+          onChange={handleFormUpdates}
         />
 
         <p>Max Price (£)</p>
@@ -85,6 +84,7 @@ export default function TryApi(): JSX.Element {
           id='high'
           name='high'
           value={propertyAttributes.high}
+          onChange={handleFormUpdates}
         />
       </PriceSection>
 
