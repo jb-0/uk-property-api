@@ -8,7 +8,7 @@ export default function Price({
 }: FormComponentProps): JSX.Element {
   return (
     <PriceSection>
-      <p>Min Price (£)</p>
+      <label>Min Price (£)</label>
       <input
         type='number'
         id='low'
@@ -17,7 +17,7 @@ export default function Price({
         onChange={handleFormUpdates}
       />
 
-      <p>Max Price (£)</p>
+      <label>Max Price (£)</label>
       <input
         type='number'
         id='high'

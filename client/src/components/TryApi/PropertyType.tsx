@@ -14,15 +14,18 @@ export default function PropertyType({
           propertyAttributes[key as keyof PropertyAttributes];
         if (typeof checkedState === 'boolean') {
           return (
-            <input
-              key={idx}
-              value={key}
-              id={key}
-              name={key}
-              type='checkbox'
-              defaultChecked={checkedState}
-              onChange={handleFormUpdates}
-            />
+            <>
+              <label>{key}</label>
+              <input
+                key={idx}
+                value={key}
+                id={key}
+                name={key}
+                type='checkbox'
+                defaultChecked={checkedState}
+                onChange={handleFormUpdates}
+              />
+            </>
           );
         }
       })}

@@ -8,7 +8,7 @@ export default function Bedrooms({
 }: FormComponentProps): JSX.Element {
   return (
     <BedroomsSection>
-      <p>Min Beds</p>
+      <label>Min Beds</label>
       <input
         type='number'
         id='minbeds'
@@ -17,7 +17,7 @@ export default function Bedrooms({
         onChange={handleFormUpdates}
       />
 
-      <p>Max Beds</p>
+      <label>Max Beds</label>
       <input
         type='number'
         id='maxbeds'

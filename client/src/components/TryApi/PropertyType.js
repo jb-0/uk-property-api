@@ -10,7 +10,9 @@ function PropertyType(_a) {
     return (react_1.default.createElement(TryApi_styles_1.PropertyTypeSection, null, Object.keys(propertyAttributes).map(function (key, idx) {
         var checkedState = propertyAttributes[key];
         if (typeof checkedState === 'boolean') {
-            return (react_1.default.createElement("input", { key: idx, value: key, id: key, name: key, type: 'checkbox', defaultChecked: checkedState, onChange: handleFormUpdates }));
+            return (react_1.default.createElement(react_1.default.Fragment, null,
+                react_1.default.createElement("label", null, key),
+                react_1.default.createElement("input", { key: idx, value: key, id: key, name: key, type: 'checkbox', defaultChecked: checkedState, onChange: handleFormUpdates })));
         }
     })));
 }
