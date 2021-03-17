@@ -15,15 +15,15 @@ export default function Home(): JSX.Element {
 
       <KeyFeaturesArticle>
         <KeyFeaturesSection>
-          <h3>140</h3>
+          <h1>140</h1>
           <p>
             cities/towns across england, scotland, wales and northern island
           </p>
-          <h3>10</h3>
+          <h1>10</h1>
           <p>
             query parameters, allowing for highly targeted searches
           </p>
-          <h3>{"< >"}</h3>
+          <h1>{"< >"}</h1>
           <p>
             open source code base, allowing for customisations and improvements
           </p>

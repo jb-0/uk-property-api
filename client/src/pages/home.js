@@ -13,11 +13,11 @@ function Home() {
             react_1.default.createElement("p", null, "Access details for almost half a million properties currently listed for sale on the UK property market")),
         react_1.default.createElement(home_styles_js_1.KeyFeaturesArticle, null,
             react_1.default.createElement(home_styles_js_1.KeyFeaturesSection, null,
-                react_1.default.createElement("h3", null, "140"),
+                react_1.default.createElement("h1", null, "140"),
                 react_1.default.createElement("p", null, "cities/towns across england, scotland, wales and northern island"),
-                react_1.default.createElement("h3", null, "10"),
+                react_1.default.createElement("h1", null, "10"),
                 react_1.default.createElement("p", null, "query parameters, allowing for highly targeted searches"),
-                react_1.default.createElement("h3", null, "< >"),
+                react_1.default.createElement("h1", null, "< >"),
                 react_1.default.createElement("p", null, "open source code base, allowing for customisations and improvements"))),
         react_1.default.createElement(TryApi_js_1.default, null)));
 }

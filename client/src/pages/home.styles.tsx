@@ -32,7 +32,7 @@ export const KeyFeaturesSection = styled.section`
   margin: 0;
 
   @media only screen and (min-width: 768px) {
-  h3 {
+  h1 {
     flex-basis: 20%;
   }
 

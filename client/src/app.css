@@ -18,5 +18,12 @@ body {
   background: linear-gradient(to right, var(--tertiary-color), var(--primary-color));
   background-repeat: no-repeat;
   background-attachment: fixed;
-  font-size: 1.5rem;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+p {
+  font-size: 1.3rem;
 }
