@@ -3,6 +3,22 @@ import styled from 'styled-components';
 export const TryApiForm = styled.form`
   max-width: 800px;
   margin: auto;
+
+  & label {
+    padding-right: 10px;
+  }
+
+  & div {
+    padding: 10px;
+  }
+
+  & section {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: center;
+  }
 `;
 
 export const LocationSection = styled.section``;

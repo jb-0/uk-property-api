@@ -8,23 +8,27 @@ export default function Price({
 }: FormComponentProps): JSX.Element {
   return (
     <PriceSection>
-      <label>Min Price (£)</label>
-      <input
-        type='number'
-        id='low'
-        name='low'
-        value={propertyAttributes.low}
-        onChange={handleFormUpdates}
-      />
+      <div>
+        <label>Min Price (£)</label>
+        <input
+          type='number'
+          id='low'
+          name='low'
+          value={propertyAttributes.low}
+          onChange={handleFormUpdates}
+        />
+      </div>
 
-      <label>Max Price (£)</label>
-      <input
-        type='number'
-        id='high'
-        name='high'
-        value={propertyAttributes.high}
-        onChange={handleFormUpdates}
-      />
+      <div>
+        <label>Max Price (£)</label>
+        <input
+          type='number'
+          id='high'
+          name='high'
+          value={propertyAttributes.high}
+          onChange={handleFormUpdates}
+        />
+      </div>
     </PriceSection>
   );
 }

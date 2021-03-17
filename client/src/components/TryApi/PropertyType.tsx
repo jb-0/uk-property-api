@@ -14,7 +14,7 @@ export default function PropertyType({
           propertyAttributes[key as keyof PropertyAttributes];
         if (typeof checkedState === 'boolean') {
           return (
-            <>
+            <div>
               <label>{key}</label>
               <input
                 key={idx}
@@ -25,7 +25,7 @@ export default function PropertyType({
                 defaultChecked={checkedState}
                 onChange={handleFormUpdates}
               />
-            </>
+            </div>
           );
         }
       })}

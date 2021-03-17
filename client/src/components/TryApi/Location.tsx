@@ -8,28 +8,32 @@ export default function Location({
 }: FormComponentProps): JSX.Element {
   return (
     <LocationSection>
-      <label>Location</label>
-      <select
-        name='location'
-        id='location'
-        value={propertyAttributes.location}
-        onChange={handleFormUpdates}
-      >
-        <option value='islington'>Islington</option>
-        <option value='berkhamsted'>Berkhamsted</option>
-        <option value='edinburgh'>Edinburgh</option>
-      </select>
+      <div>
+        <label>Location</label>
+        <select
+          name='location'
+          id='location'
+          value={propertyAttributes.location}
+          onChange={handleFormUpdates}
+        >
+          <option value='islington'>Islington</option>
+          <option value='berkhamsted'>Berkhamsted</option>
+          <option value='edinburgh'>Edinburgh</option>
+        </select>
+      </div>
 
-      <label>Radius (miles)</label>
-      <input
-        id='radius'
-        type='range'
-        min='1'
-        max='40'
-        value={propertyAttributes.radius}
-        onChange={handleFormUpdates}
-      />
-      <output>{propertyAttributes.radius}</output>
+      <div>
+        <label>Radius (miles)</label>
+        <input
+          id='radius'
+          type='range'
+          min='1'
+          max='40'
+          value={propertyAttributes.radius}
+          onChange={handleFormUpdates}
+        />
+        <output>{propertyAttributes.radius}</output>
+      </div>
     </LocationSection>
   );
 }
