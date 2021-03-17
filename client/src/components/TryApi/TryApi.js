@@ -61,6 +61,8 @@ function TryApi() {
         }
     }
     return (react_1.default.createElement(TryApi_styles_1.TryApiForm, null,
+        react_1.default.createElement("h1", null, "Try it out"),
+        react_1.default.createElement("p", null, "Fill out the form below and click submit to try out the UK Property API"),
         react_1.default.createElement(Location_1.default, { propertyAttributes: propertyAttributes, handleFormUpdates: handleFormUpdates }),
         react_1.default.createElement(Price_1.default, { propertyAttributes: propertyAttributes, handleFormUpdates: handleFormUpdates }),
         react_1.default.createElement(Bedrooms_1.default, { propertyAttributes: propertyAttributes, handleFormUpdates: handleFormUpdates }),

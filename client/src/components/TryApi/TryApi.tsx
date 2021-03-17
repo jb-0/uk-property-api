@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import Bedrooms from './Bedrooms';
 import { PropertyAttributes } from './interfaces';
-import Location from './Location'
+import Location from './Location';
 import Price from './Price';
 import PropertyType from './PropertyType';
 import { TryApiForm } from './TryApi.styles';
 
 export default function TryApi(): JSX.Element {
-  const [propertyAttributes, setPropertyAttributes] = useState(new PropertyAttributes());
+  const [propertyAttributes, setPropertyAttributes] = useState(
+    new PropertyAttributes()
+  );
 
   function handleFormUpdates(
     event:
@@ -31,7 +33,7 @@ export default function TryApi(): JSX.Element {
           ],
         };
       });
-    } 
+    }
     // For all non-boolean (number and string) cases, simply set the value
     else {
       setPropertyAttributes((prevValues) => {
@@ -45,10 +47,26 @@ export default function TryApi(): JSX.Element {
 
   return (
     <TryApiForm>
-      <Location propertyAttributes={propertyAttributes} handleFormUpdates={handleFormUpdates} />
-      <Price propertyAttributes={propertyAttributes} handleFormUpdates={handleFormUpdates} />
-      <Bedrooms propertyAttributes={propertyAttributes} handleFormUpdates={handleFormUpdates} />
-      <PropertyType propertyAttributes={propertyAttributes} handleFormUpdates={handleFormUpdates} />
+      <h1>Try it out</h1>
+      <p>
+        Fill out the form below and click submit to try out the UK Property API
+      </p>
+      <Location
+        propertyAttributes={propertyAttributes}
+        handleFormUpdates={handleFormUpdates}
+      />
+      <Price
+        propertyAttributes={propertyAttributes}
+        handleFormUpdates={handleFormUpdates}
+      />
+      <Bedrooms
+        propertyAttributes={propertyAttributes}
+        handleFormUpdates={handleFormUpdates}
+      />
+      <PropertyType
+        propertyAttributes={propertyAttributes}
+        handleFormUpdates={handleFormUpdates}
+      />
     </TryApiForm>
   );
 }
