@@ -11,7 +11,7 @@ export class PropertyAttributes {
   location = "islington";
 }
 
-export interface LocationProps {
+export interface FormComponentProps {
   propertyAttributes: PropertyAttributes;
   handleFormUpdates: (
     event:

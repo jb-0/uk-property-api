@@ -1,13 +1,10 @@
 import React, { useState } from 'react';
-import { PropertyAttributes } from './interfaces'
+import Bedrooms from './Bedrooms';
+import { PropertyAttributes } from './interfaces';
 import Location from './Location'
-import {
-  TryApiForm,
-  LocationSection,
-  PriceSection,
-  BedroomsSection,
-  PropertyTypeSection,
-} from './TryApi.styles';
+import Price from './Price';
+import PropertyType from './PropertyType';
+import { TryApiForm } from './TryApi.styles';
 
 export default function TryApi(): JSX.Element {
   const [propertyAttributes, setPropertyAttributes] = useState(new PropertyAttributes());
@@ -49,66 +46,9 @@ export default function TryApi(): JSX.Element {
   return (
     <TryApiForm>
       <Location propertyAttributes={propertyAttributes} handleFormUpdates={handleFormUpdates} />
-
-      {/* <PriceSection>
-        <p>Min Price (£)</p>
-        <input
-          type='number'
-          id='low'
-          name='low'
-          value={propertyAttributes.low}
-          onChange={handleFormUpdates}
-        />
-
-        <p>Max Price (£)</p>
-        <input
-          type='number'
-          id='high'
-          name='high'
-          value={propertyAttributes.high}
-          onChange={handleFormUpdates}
-        />
-      </PriceSection>
-
-      <BedroomsSection>
-        <p>Min Beds</p>
-        <input
-          type='number'
-          id='minbeds'
-          name='minbeds'
-          value={propertyAttributes.minbeds}
-          onChange={handleFormUpdates}
-        />
-
-        <p>Max Beds</p>
-        <input
-          type='number'
-          id='maxbeds'
-          name='maxbeds'
-          value={propertyAttributes.maxbeds}
-          onChange={handleFormUpdates}
-        />
-      </BedroomsSection>
-
-      <PropertyTypeSection>
-        {Object.keys(propertyAttributes).map((key, idx) => {
-          const checkedState =
-            propertyAttributes[key as keyof PropertyAttributes];
-          if (typeof checkedState === 'boolean') {
-            return (
-              <input
-                key={idx}
-                value={key}
-                id={key}
-                name={key}
-                type='checkbox'
-                defaultChecked={checkedState}
-                onChange={handleFormUpdates}
-              />
-            );
-          }
-        })}
-      </PropertyTypeSection> */}
+      <Price propertyAttributes={propertyAttributes} handleFormUpdates={handleFormUpdates} />
+      <Bedrooms propertyAttributes={propertyAttributes} handleFormUpdates={handleFormUpdates} />
+      <PropertyType propertyAttributes={propertyAttributes} handleFormUpdates={handleFormUpdates} />
     </TryApiForm>
   );
 }

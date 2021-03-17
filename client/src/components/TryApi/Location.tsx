@@ -1,11 +1,11 @@
 import React from 'react';
 import { LocationSection } from './TryApi.styles';
-import { LocationProps } from './interfaces';
+import { FormComponentProps } from './interfaces';
 
 export default function Location({
   propertyAttributes,
   handleFormUpdates,
-}: LocationProps): JSX.Element {
+}: FormComponentProps): JSX.Element {
   return (
     <LocationSection>
       <label>Location</label>

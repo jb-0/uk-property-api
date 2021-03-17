@@ -36,6 +36,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importStar(require("react"));
 var interfaces_1 = require("./interfaces");
 var Location_1 = __importDefault(require("./Location"));
+var Price_1 = __importDefault(require("./Price"));
 var TryApi_styles_1 = require("./TryApi.styles");
 function TryApi() {
     var _a = react_1.useState(new interfaces_1.PropertyAttributes()), propertyAttributes = _a[0], setPropertyAttributes = _a[1];
@@ -58,6 +59,7 @@ function TryApi() {
         }
     }
     return (react_1.default.createElement(TryApi_styles_1.TryApiForm, null,
-        react_1.default.createElement(Location_1.default, { propertyAttributes: propertyAttributes, handleFormUpdates: handleFormUpdates })));
+        react_1.default.createElement(Location_1.default, { propertyAttributes: propertyAttributes, handleFormUpdates: handleFormUpdates }),
+        react_1.default.createElement(Price_1.default, { propertyAttributes: propertyAttributes, handleFormUpdates: handleFormUpdates })));
 }
 exports.default = TryApi;
