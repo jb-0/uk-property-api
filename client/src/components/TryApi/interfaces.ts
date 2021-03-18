@@ -11,6 +11,22 @@ export class PropertyAttributes {
   location = "islington";
 }
 
+interface Dwelling {
+  name: string,
+  price: string,
+  type: string,
+  link: string,
+}
+
+interface DwellingsSearchRes {
+  noOfDwellings: number;
+  dwellings: Array<Dwelling>;
+}
+
+export interface ResultsProps {
+  propertyData: DwellingsSearchRes
+}
+
 export interface FormComponentProps {
   propertyAttributes: PropertyAttributes;
   handleFormUpdates: (
