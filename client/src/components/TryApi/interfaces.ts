@@ -24,7 +24,7 @@ interface DwellingsSearchRes {
 }
 
 export interface ResultsProps {
-  propertyData: DwellingsSearchRes
+  propertyData: DwellingsSearchRes | undefined
 }
 
 export interface FormComponentProps {
