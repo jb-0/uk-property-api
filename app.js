@@ -41,15 +41,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = __importDefault(require("express"));
 var body_parser_1 = __importDefault(require("body-parser"));
+var cors_1 = __importDefault(require("cors"));
 var generateURL_js_1 = __importDefault(require("./services/generateURL/generateURL.js"));
 var scrapeProperties_js_1 = require("./services/scrapeProperties/scrapeProperties.js");
 var app = express_1.default();
 var PORT = process.env.PORT || 8080;
 app.use(body_parser_1.default.urlencoded({ extended: true }));
 app.use(express_1.default.static('public'));
-app.route('/').get(function (req, res) {
-    res.sendFile(__dirname + "/views/home.html");
-});
+app.use(cors_1.default());
+// app.route('/').get((req, res) => {  
+//   res.sendFile(`${__dirname}/views/home.html`);
+// });
+app.use(express_1.default.static(__dirname + "/client/dist"));
 app.route('/properties')
     .get(function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var url, properties;
@@ -66,5 +69,8 @@ app.route('/properties')
         }
     });
 }); });
+app.get('*', function (req, res) {
+    res.sendFile(__dirname + "/client/dist/index.html");
+});
 app.listen(PORT);
 console.log("Running on port " + PORT);
