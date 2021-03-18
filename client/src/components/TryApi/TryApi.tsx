@@ -62,7 +62,7 @@ export default function TryApi(): JSX.Element {
         )
         .join('&');
       
-      const response = await fetch(`http://localhost:8080/properties?${query}`,
+      const response = await fetch(`/properties?${query}`,
       {
         method: 'GET',
         headers: {
