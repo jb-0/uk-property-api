@@ -12,16 +12,19 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.use(cors())
 
-app.route('/').get((req, res) => {  
-  res.sendFile(`${__dirname}/views/home.html`);
-});
-
+app.use(express.static(`${__dirname}/client/dist`));
 app.route('/properties')
   .get(async (req, res) => {
+    console.log(req.query);
+    
     const url = generateURL(req.query);
     const properties = await processSearch(url);
     res.send(properties);
   });
+app.get('*', (req, res) => {
+  res.sendFile(`${__dirname}/client/dist/index.html`);
+});
+
 
 app.listen(PORT);
 console.log(`Running on port ${PORT}`);
