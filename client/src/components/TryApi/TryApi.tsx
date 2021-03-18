@@ -4,6 +4,7 @@ import { PropertyAttributes } from './interfaces';
 import Location from './Location';
 import Price from './Price';
 import PropertyType from './PropertyType';
+import Results from './Results';
 import { TryApiForm, SubmitButton } from './TryApi.styles';
 
 export default function TryApi(): JSX.Element {
@@ -103,6 +104,8 @@ export default function TryApi(): JSX.Element {
       />
 
       <SubmitButton type='submit' />
+
+      <Results propertyData={propertyData} />
     </TryApiForm>
   );
 }
