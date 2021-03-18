@@ -41,12 +41,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = __importDefault(require("express"));
 var body_parser_1 = __importDefault(require("body-parser"));
+var cors_1 = __importDefault(require("cors"));
 var generateURL_js_1 = __importDefault(require("./services/generateURL/generateURL.js"));
 var scrapeProperties_js_1 = require("./services/scrapeProperties/scrapeProperties.js");
 var app = express_1.default();
 var PORT = process.env.PORT || 8080;
 app.use(body_parser_1.default.urlencoded({ extended: true }));
 app.use(express_1.default.static('public'));
+app.use(cors_1.default());
 app.route('/').get(function (req, res) {
     res.sendFile(__dirname + "/views/home.html");
 });
@@ -56,7 +58,6 @@ app.route('/properties')
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                console.log(req.query);
                 url = generateURL_js_1.default(req.query);
                 return [4 /*yield*/, scrapeProperties_js_1.processSearch(url)];
             case 1:
