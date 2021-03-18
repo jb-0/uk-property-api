@@ -21,6 +21,11 @@ export const TryApiForm = styled.form`
   }
 `;
 
+export const SubmitButton = styled.input`
+  font-family: inherit;
+  margin: 10px 0;
+`;
+
 export const LocationSection = styled.section``;
 
 export const PriceSection = styled.section``;
