@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.use(cors())
 
-app.use(express.static(`${__dirname}/client/dist`));
+app.use(express.static(`${__dirname}/client/`));
 app.route('/properties')
   .get(async (req, res) => {
     console.log(req.query);
@@ -22,7 +22,7 @@ app.route('/properties')
     res.send(properties);
   });
 app.get('*', (req, res) => {
-  res.sendFile(`${__dirname}/client/dist/index.html`);
+  res.sendFile(`${__dirname}/client/public/index.html`);
 });
 
 

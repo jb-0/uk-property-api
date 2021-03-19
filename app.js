@@ -49,10 +49,7 @@ var PORT = process.env.PORT || 8080;
 app.use(body_parser_1.default.urlencoded({ extended: true }));
 app.use(express_1.default.static('public'));
 app.use(cors_1.default());
-// app.route('/').get((req, res) => {  
-//   res.sendFile(`${__dirname}/views/home.html`);
-// });
-app.use(express_1.default.static(__dirname + "/client/dist"));
+app.use(express_1.default.static(__dirname + "/client/"));
 app.route('/properties')
     .get(function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var url, properties;
@@ -70,7 +67,7 @@ app.route('/properties')
     });
 }); });
 app.get('*', function (req, res) {
-    res.sendFile(__dirname + "/client/dist/index.html");
+    res.sendFile(__dirname + "/client/public/index.html");
 });
 app.listen(PORT);
 console.log("Running on port " + PORT);
