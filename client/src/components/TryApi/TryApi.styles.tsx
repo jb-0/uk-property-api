@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const TryApiForm = styled.form`
   max-width: 800px;
   margin: auto;
+  padding-bottom: 50px;
 
   & label {
     padding-right: 10px;
@@ -33,3 +34,10 @@ export const PriceSection = styled.section``;
 export const BedroomsSection = styled.section``;
 
 export const PropertyTypeSection = styled.section``;
+
+export const ResultsSection = styled.section `
+  background-color: var(--secondary-color);
+  border: solid 2px var(--tertiary-color);
+  color: var(--tertiary-color);
+  margin: 0 15px;
+`;
