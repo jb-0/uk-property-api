@@ -7,7 +7,7 @@ export const HeaderSection = styled.section`
   justify-content: center;
   align-items: center;
   height: 400px;
-  width: 800px;
+  max-width: 800px;
   margin: auto;
 `;
 
@@ -22,22 +22,24 @@ export const KeyFeaturesArticle = styled.article`
   justify-content: center;
   padding: 30px 10px;
 `;
+
 export const KeyFeaturesSection = styled.section`
   max-width: 800px;
-  display: flex;
+  display: inline-flex;
   flex-direction: row;
-  flex-flow: row wrap;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  margin: 0;
 
-  @media only screen and (min-width: 768px) {
-  h1 {
+  & h1 {
     flex-basis: 20%;
   }
-
-  p {
-    flex-basis: 80%
+  
+  & p {
+    flex-basis: 80%;
   }
-}
+
+  @media only screen and (max-width: 768px) {
+    display: block;
+  }
 `;
