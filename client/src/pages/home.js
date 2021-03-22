@@ -14,7 +14,7 @@ function Home() {
         react_1.default.createElement(home_styles_js_1.KeyFeaturesArticle, null,
             react_1.default.createElement(home_styles_js_1.KeyFeaturesSection, null,
                 react_1.default.createElement("h1", null, "140"),
-                react_1.default.createElement("p", null, "cities/towns across england, scotland, wales and northern island"),
+                react_1.default.createElement("p", null, "cities/towns across england, scotland, wales and northern ireland"),
                 react_1.default.createElement("h1", null, "10"),
                 react_1.default.createElement("p", null, "query parameters, allowing for highly targeted searches"),
                 react_1.default.createElement("h1", null, "< >"),

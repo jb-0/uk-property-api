@@ -17,7 +17,7 @@ export default function Home(): JSX.Element {
         <KeyFeaturesSection>
           <h1>140</h1>
           <p>
-            cities/towns across england, scotland, wales and northern island
+            cities/towns across england, scotland, wales and northern ireland
           </p>
           <h1>10</h1>
           <p>
