@@ -51,6 +51,8 @@ app.use(body_parser_1.default.urlencoded({ extended: true }));
 app.use(express_1.default.static('public'));
 app.use(cors_1.default());
 if (process.env._ && process.env._.indexOf("heroku") !== -1) {
+    console.log('Think I am in Heroku, path:');
+    console.log(path_1.default.join(__dirname, '../client/public'));
     app.use(express_1.default.static(path_1.default.join(__dirname, '../client/public')));
 }
 else {

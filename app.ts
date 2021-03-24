@@ -14,6 +14,8 @@ app.use(express.static('public'));
 app.use(cors())
 
 if (process.env._ && process.env._.indexOf("heroku") !== -1) {
+  console.log('Think I am in Heroku, path:');
+  console.log(path.join(__dirname, '../client/public'));
   app.use(express.static(path.join(__dirname, '../client/public')));
 }
 else {

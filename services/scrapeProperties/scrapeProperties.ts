@@ -18,8 +18,6 @@ const puppeteerConfig = {
 };
 
 const processSearch = async (url: string): Promise<DwellingsSearchRes> => {
-  console.log(url);
-  
   const allDwellings: Array<Dwelling> = [];
   const numberOfPages = await getNumberOfPages(url, 3);
 
@@ -36,8 +34,6 @@ const processSearch = async (url: string): Promise<DwellingsSearchRes> => {
     allDwellings.push(...pageDwellings);
 
     await browser.close();
-    console.log(allDwellings);
-    
   }
 
   const dwellings: DwellingsSearchRes = {
