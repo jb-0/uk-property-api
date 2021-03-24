@@ -1,8 +1,9 @@
 import express from 'express';
+import path from 'path';
 import bodyParser from 'body-parser';
 import cors from 'cors';
-import generateURL from './services/generateURL/generateURL.js'
-import { processSearch } from './services/scrapeProperties/scrapeProperties.js'
+import generateURL from './services/generateURL/generateURL'
+import { processSearch } from './services/scrapeProperties/scrapeProperties'
 
 const app = express();
 
@@ -12,7 +13,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.use(cors())
 
-app.use(express.static(`${__dirname}/client/public`));
+if (process.env._ && process.env._.indexOf("heroku") !== -1) {
+  app.use(express.static(path.join(__dirname, '../client/public')));
+}
+else {
+  app.use(express.static(`${__dirname}/client/public`));
+}
+
 app.route('/properties')
   .get(async (req, res) => {
     console.log(req.query);

@@ -2,8 +2,10 @@
   "name": "uk-property-api",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "./build/app.js",
   "scripts": {
+    "start": "nodemon app.ts",
+    "build": "tsc --project ./",
     "test": "jest",
     "lint": "eslint . --ext .ts"
   },
