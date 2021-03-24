@@ -1,4 +1,5 @@
 {
+  "exclude": ["client"],
   "compilerOptions": {
     "jsx": "react",
     /* Visit https://aka.ms/tsconfig.json to read more about this file */

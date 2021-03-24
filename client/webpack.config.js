@@ -3,15 +3,14 @@ const webpack = require("webpack");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-  entry: "./src/index.js",
-  mode: "development",
+  entry: "./src/index.tsx",
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.(ts|tsx)$/,
         exclude: /(node_modules|bower_components)/,
-        loader: "babel-loader",
-        options: { presets: ["@babel/env"] }
+        include: [path.resolve(__dirname, 'src')],
+        use: 'ts-loader',
       },
       {
         test: /\.css$/,
@@ -19,17 +18,17 @@ module.exports = {
       }
     ]
   },
-  resolve: { extensions: ["*", ".js", ".jsx"] },
+  resolve: { extensions: ["*", ".js", ".jsx", ".ts", ".tsx"] },
   output: {
-    path: path.resolve(__dirname, "dist/"),
-    publicPath: "/dist/",
+    path: path.resolve(__dirname, "public/"),
+    publicPath: "/public/",
     filename: "bundle.js"
   },
   devServer: {
-    contentBase: path.join(__dirname, "public/"),
+    publicPath: '/',
     port: 3000,
-    publicPath: "http://localhost:3000/dist/",
-    hotOnly: true
+    contentBase: './public',
+    hot: true,
   },
   plugins: [new webpack.HotModuleReplacementPlugin()], 
 };
