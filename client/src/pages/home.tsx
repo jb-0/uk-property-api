@@ -1,6 +1,6 @@
 import React from 'react';
-import TryApi from '../components/TryApi/TryApi.js';
-import { HeaderSection, KeyFeaturesSection, KeyFeaturesArticle } from './home.styles.js';
+import TryApi from '../components/TryApi/TryApi';
+import { HeaderSection, KeyFeaturesSection, KeyFeaturesArticle } from './home.styles';
 
 export default function Home(): JSX.Element {
   return (
