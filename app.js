@@ -49,7 +49,7 @@ var PORT = process.env.PORT || 8080;
 app.use(body_parser_1.default.urlencoded({ extended: true }));
 app.use(express_1.default.static('public'));
 app.use(cors_1.default());
-app.use(express_1.default.static(__dirname + "/client/"));
+app.use(express_1.default.static(__dirname + "/client/public"));
 app.route('/properties')
     .get(function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var url, properties;

@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.use(cors())
 
-app.use(express.static(`${__dirname}/client/`));
+app.use(express.static(`${__dirname}/client/public`));
 app.route('/properties')
   .get(async (req, res) => {
     console.log(req.query);
