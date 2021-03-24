@@ -1,4 +1,4 @@
-import { processSearch, getNumberOfPages, scrapePropertiesFromPage } from './scrapeProperties.js';
+import { processSearch, getNumberOfPages, scrapePropertiesFromPage } from './scrapeProperties';
 
 const baseURL = 'https://www.home.co.uk/search/results.htm?inc_sold=0&showmap=0&location='
 

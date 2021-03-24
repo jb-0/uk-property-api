@@ -1,4 +1,4 @@
-import generateURL from './generateURL.js';
+import generateURL from './generateURL';
 
 describe('Generate URL function tests (ts)', () => {
   test('using two parameters returns the expected url', () => {
