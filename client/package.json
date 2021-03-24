@@ -17,6 +17,7 @@
     "@babel/preset-env": "^7.13.10",
     "@babel/preset-react": "^7.12.13",
     "@types/react": "^17.0.3",
+    "@types/react-dom": "^17.0.3",
     "@types/styled-components": "^5.1.8",
     "babel-loader": "^8.2.2",
     "css-loader": "^5.1.2",
@@ -30,6 +31,7 @@
   "dependencies": {
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "styled-components": "^5.2.1"
+    "styled-components": "^5.2.1",
+    "ts-loader": "^8.0.18"
   }
 }
