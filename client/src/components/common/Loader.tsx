@@ -1,8 +1,12 @@
 import React from 'react';
-import { LoaderCircle } from './Loader.styles';
+import { LoaderCirclesSection, LoaderCircle } from './Loader.styles';
 
 export default function Loader(): JSX.Element  {
   return (
-    <LoaderCircle />
+    <LoaderCirclesSection>
+      <LoaderCircle animationDelay={0}/>
+      <LoaderCircle animationDelay={0.5}/>
+      <LoaderCircle animationDelay={1}/>
+    </LoaderCirclesSection>
   )
 }
