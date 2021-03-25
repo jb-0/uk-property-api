@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Loader from '../common/Loader';
 import Bedrooms from './Bedrooms';
 import { PropertyAttributes } from './interfaces';
 import Location from './Location';
@@ -13,6 +14,7 @@ export default function TryApi(): JSX.Element {
   );
   const [submittedForm, setSubmittedForm] = useState(false);
   const [propertyData, setPropertyData] = useState();
+  const [isSearching, setIsSearching] = useState(false);
 
   function handleFormUpdates(
     e:
@@ -55,6 +57,8 @@ export default function TryApi(): JSX.Element {
 
   useEffect(() => {
     async function callPropertyAPI() {
+      setIsSearching(true);
+      
       const query = Object.keys(propertyAttributes)
         .map(
           (key) =>
@@ -72,6 +76,7 @@ export default function TryApi(): JSX.Element {
       });
       
       setPropertyData(await response.json());
+      setIsSearching(false);
     }
 
     if (submittedForm) {
@@ -103,7 +108,10 @@ export default function TryApi(): JSX.Element {
         handleFormUpdates={handleFormUpdates}
       />
 
-      <SubmitButton type='submit' />
+      {isSearching ?
+        <Loader /> :
+        <SubmitButton type='submit' />
+      }
 
       <Results propertyData={propertyData} />
     </TryApiForm>
