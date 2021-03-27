@@ -41,6 +41,7 @@ export const ResultsSection = styled.section `
   color: var(--tertiary-color);
   margin: 0 15px;
   word-wrap: break-word;
+  word-break: break-all;
   white-space: pre-line;
   text-align: left;
   padding: 10px;
